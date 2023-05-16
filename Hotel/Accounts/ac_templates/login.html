@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block body %}
+
+{% if request.method == 'POST' %} <p class="mt-5 text-center text-lg font-bold text-red-500">{{ error }}</p> {% endif %}
+
+<div class="login-container flex ">
+    <div class="login-form rounded-lg border border-blue-900  my-5 p-5 mx-auto">
+        <form action="{% url 'Accounts:login' %}" method="post">
+            {%csrf_token%}
+            <h2 class=" text-center font-extrabold text-2xl text-purple-900 m-5">LOGIN</h2>
+            <div class="email">
+                <label for="email" class="text-sm font-bold mt-5">Email Address:</label><br>
+                <input name="email" type="email" required placeholder="Enter your email address" class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+            </div>
+            <div class="password">
+                <label for="email"  class="text-sm font-bold mt-5">Password:</label><br>
+                <input name="password" type="password" required placeholder="Enter your password" class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+            </div>
+            <div class="submit_btn my-3 flex justify-between hover:underline">
+                <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
+                bg-purple-700 hover:bg-purple-900">Submit</button>
+                <a href="{% url 'Accounts:change_password' %}" class="font-semibold text-blue-900">Forgot Password?</a>
+            </div>
+            <div class="register">
+                Don't have an account ?
+                <a href="{% url 'Accounts:signup' %}" class="hover:underline font-semibold">Register</a> Here!
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

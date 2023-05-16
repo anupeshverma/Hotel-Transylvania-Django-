@@ -1,0 +1,82 @@
+{% load static %}
+<nav class="navigation bg-purple-900 flex justify-between items-center h-auto">
+    <div class="flex justify-between items-center">
+        <div class="logo flex text-center text-white m-2 "><a href="#" id="navbar-logo">Hotel <br>Transylvania</a>
+        </div>
+        <div class="text-white font-bold mx-5">
+            <a class="mx-2" href="{% url 'home' %}">Home</a>
+            <a class="mx-2" href="">About</a>
+            <a class="mx-2" href="">Contact</a>
+        </div>
+    </div>
+
+    <div class="flex mx-5">
+
+        {% if user.is_authenticated %}
+        <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0" id="user-menu-button">
+            {% if user.profile_pic and user.profile_pic.url %}
+            <img src="{{user.profile_pic.url}}" alt="profile" id="profile_pic" class="w-10 h-10 rounded-full ">
+            {% elif User.role == 'Human' %}
+            <img src="{% static 'images/default_human.png' %}" alt="Human" id="profile_pic"
+                class="w-10 h-10 rounded-full border-2">
+            {% else %}
+            <img src="{% static 'images/default_monster.png' %}" alt="Monster" id="profile_pic"
+                class="w-12 h-12 rounded-full border-2">
+            {% endif %}
+
+        </button>
+        <!-- Dropdown menu -->
+        <div id="user-dropdown"
+            class="bg--600 mt-12 hidden absolute rounded-md right-0 p-2 font-semibold z-50 shadow-md">
+            <ul class="divide-y">
+                <li>
+                    <a href="{% url 'Accounts:profile' %}" type="button"
+                        class="my-1 hover:text-green-900 font-semibold transition duration-300">
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'Accounts:edit_profile' %}" type="button"
+                        class="my-1 hover:text-green-900 font-semibold transition duration-300">
+                        Edit Profile
+                    </a>
+                </li>
+                <li>
+                    <div>
+                        <a href="{% url 'Accounts:logout' %} " type="button"
+                            class="my-1 hover:text-red-500 font-semibold transition duration-300">
+                            LogOut
+                        </a>
+
+                    </div>
+                </li>
+
+                {% else %}
+
+                <a class="font-bold mx-2 px-2 py-1 bg-blue-200 hover:bg-blue-400 border-white border rounded-md"
+                    href="{% url 'Accounts:signup' %}">SignUp</a>
+                <a class="font-bold mx-2 px-2 py-1 bg-blue-200 hover:bg-blue-400  border-white border rounded-md"
+                    href="{% url 'Accounts:login' %}">Login</a>
+
+        </div>
+        {% endif %}
+
+        <script>
+            const button = document.getElementById('user-menu-button');
+            const dropdown = document.getElementById('user-dropdown');
+            button.addEventListener('click', function () {
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Click anywhere to hide menu
+            document.addEventListener("click", (event) => {
+                const target = event.target;
+                const isClickInsideMenu = dropdown.contains(target);
+                const isClickInsideBtn = button.contains(target);
+                if (!isClickInsideMenu && !isClickInsideBtn) {
+                    dropdown.classList.add("hidden");
+                }
+            });
+        </script>
+
+</nav>
