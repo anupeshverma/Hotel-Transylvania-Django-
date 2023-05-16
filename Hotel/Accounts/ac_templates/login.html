@@ -16,10 +16,10 @@
                 <label for="email"  class="text-sm font-bold mt-5">Password:</label><br>
                 <input name="password" type="password" required placeholder="Enter your password" class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
             </div>
-            <div class="submit_btn my-3 flex justify-between hover:underline">
+            <div class="submit_btn my-3 flex justify-between ">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
                 bg-purple-700 hover:bg-purple-900">Submit</button>
-                <a href="{% url 'Accounts:change_password' %}" class="font-semibold text-blue-900">Forgot Password?</a>
+                <a href="{% url 'Accounts:change_password' %}" class="font-semibold text-blue-900 hover:underline">Forgot Password?</a>
             </div>
             <div class="register">
                 Don't have an account ?

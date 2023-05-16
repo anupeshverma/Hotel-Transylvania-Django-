@@ -14,7 +14,7 @@
         <p class="mt-5 text-center text-lg font-bold text-red-600">Enter more secure password !</p>
     
     {% elif error == 4 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Fill the fields appropriately !</p>
+        <p class="mt-5 text-center text-lg font-bold text-red-600">Invalid Contact No. !</p>
       {% endif %}  
     
 {% endif %}
@@ -63,8 +63,9 @@
             </div>
             <div class="password">
                 <label for="password" class="text-sm font-bold mt-5">Password:</label><br>
-                <input name="password" type="password" title="Password must containe alteast one capital letter, one small letter, one number and a special character." required placeholder="Enter your password"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                <input name="password" type="password" required placeholder="Enter your password"
+                    class=" px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    <p class="mb-3 text-xs text-gray-800">&nbsp;*Password must contain alteast one capital letter, one small letter, one number and a special character.</p>
             </div>
             <div class="confirm-password">
                 <label for="confirm-password" class="text-sm font-bold mt-5">Confirm Password:</label><br>

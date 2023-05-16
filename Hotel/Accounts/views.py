@@ -13,7 +13,11 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.password_validation import (
+    validate_password,
+    password_validators_help_texts,
+)
+
 
 from .models import *
 import random
@@ -32,11 +36,22 @@ def userlogin(request):
         user_account = userAccount.objects.filter(email=email)
         if user_account:
             print(user_account)
-            user = authenticate(username=email, password=password)
-            print(user)
-            if user is not None:
-                login(request, user)
-                return redirect("home")
+            if User.objects.filter(username=email).first().is_active:
+                user = authenticate(username=email, password=password)
+                print(user)
+                if user is not None:
+                    login(request, user)
+                    return redirect("home")
+                else:
+                    return render(
+                        request, "login.html", {"error": "Invalid E-mail or Password"}
+                    )
+            else:
+                return render(
+                    request,
+                    "error_page.html",
+                    {"error": "Your account is not Active. Activate First"},
+                )
         else:
             return render(
                 request, "login.html", {"error": "Invalid E-mail or Password"}
@@ -132,9 +147,10 @@ def userSignup(request):
         except ValidationError as e:
             data["error"] = "Something Went Wrong !"
             return render(request, "signup.html", data)
-
-        return HttpResponse(
-            "Please confirm your email address to complete the registration"
+        return render(
+            request,
+            "error_page.html",
+            {"error": "Please confirm your email address to complete the registration"},
         )
 
 
@@ -155,11 +171,10 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse(
-            "Thank you for your email confirmation. Now you can login to your account."
-        )
+        logout(request)
+        return render(request, 'error_page.html', {"error":"Thank You For Your Email Confirmation."})
     else:
-        return HttpResponse("Activation link is invalid!")
+        return render(request, 'error_page.html', {"error":"Activation Link Is Invalid."})
 
 
 class profile(LoginRequiredMixin, View):
@@ -167,7 +182,8 @@ class profile(LoginRequiredMixin, View):
         user_account = userAccount.objects.filter(email=request.user.username)
         print(user_account)
         if not user_account:
-            return HttpResponse("No profile found")
+            logout(request)
+            return render(request, 'error_page.html', {"error":"No Profile Found"})
 
         user_account = user_account[0]
         return render(request, "profile_page.html", {"acc": user_account})
@@ -227,13 +243,18 @@ def deleteProfile(request):
         user_account = user_account[0]
 
         if user_account and str(otp) == str(otp_storage):
-            # Delete the user from the database
-            user_account.delete()
+            # Delete the profile photo if it exists
+            if user_account.profile_pic:
+                previous_photo_path = user_account.profile_pic.path
+                if os.path.exists(previous_photo_path):
+                    os.remove(previous_photo_path)
 
             # Delete the user from the django admin also
-            user = User.objects.get(username="username")
-            user.profile.delete()
+            user = User.objects.get(username=user_account.email)
             user.delete()
+
+            # Delete the user from the database
+            user_account.delete()
             userlogout(request)
             return redirect("home")
     return render(request, "confirm_delete.html", {"error": "Enter correct OTP !"})
@@ -256,16 +277,16 @@ def editPhoto(request):
         return redirect("Accounts:profile")
     return render(request, "profile_page.html", {"acc": user_account})
 
+
 class change_password(LoginRequiredMixin, View):
     def get(self, request):
         otp = random.randint(100000, 999999)
-        global otp_storage
-        otp_storage = otp
+        request.session["otp"] = otp
         user_account = userAccount.objects.filter(email=request.user.username)
         user_account = user_account[0]
+
         # sent the mail to the user
         message = f"Hi {user_account.first_name},\n\nYour OTP for password change is {otp}. Do not share it with anyone."
-
         mail_subject = "Passworcd Change Confirmation OTP"
         email = EmailMessage(mail_subject, message, to=[user_account.email])
         try:
@@ -275,24 +296,35 @@ class change_password(LoginRequiredMixin, View):
             return HttpResponseServerError(
                 "An error occurred while sending the email. Please try again later."
             )
+
     def post(self, request):
-        if request.POST.get("otp") == otp_storage:
+        user_otp = request.POST.get("otp")
+        stored_otp = request.session.get("otp")
+        if str(user_otp) == str(stored_otp):
             # if the otp is correct
             new_password = request.POST.get("new_password")
             confirm_password = request.POST.get("confirm_password")
-                # if the passwords are the same
+            # if the passwords are the same
             if new_password != confirm_password:
-                return render(request, "change_password.html", {"error" : "Password Do Not Match"})
+                return render(
+                    request, "change_password.html", {"error": "Password Do Not Match"}
+                )
             try:
                 validate_password(new_password)
             except ValidationError as e:
-               return render(request, "change_password.html", {"error" : "Enter more secure password !"})
-                
+                error_message = "\n".join(e.messages)
+                error_message += "\n\n" + password_validators_help_texts()
+                # Optional: Include password requirements
+                return render(request, "change_password.html", {"error": error_message})
+
             user = get_user_model().objects.get(username=request.user.username)
+            print(user)
             user.set_password(new_password)
             user.save()
-            return redirect("Accounts:profile") 
-        
+            del request.session["otp"]
+            user = authenticate(username=request.user.username, password=new_password)
+            login(request, user)
+            return redirect("Accounts:profile")
+
         else:
-             return render(request, "change_password.html", {"error" : "OTP Incorrect"})
-        
+            return render(request, "change_password.html", {"error": "OTP Incorrect"})
