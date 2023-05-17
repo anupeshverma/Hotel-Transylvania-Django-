@@ -13,5 +13,7 @@ urlpatterns = [
     path('EditProfile/', editProfile, name='edit_profile'),
     path('EditPhoto/', editPhoto, name='edit_photo'),
     path('DeleteProfile/', deleteProfile, name='delete_profile'),
-    path('ChangePassword/', views.change_password.as_view(), name='change_password'),
+    path('ChangePassword/', change_password, name='change_password'),
+    path('ForgotPassword/', forgot_password, name='forgot_password'),
+    path('OTPVerification/', otp_verification, name='otp_verification'),
 ]
