@@ -3,26 +3,20 @@
 
 {% if request.method == 'POST' %} <p class="mt-5 text-center text-lg font-bold text-red-600">{{ error }}</p> {% endif %}
 
-<div class="login-container flex ">
-    <div class="login-form rounded-lg border border-blue-900  my-5 p-5 mx-auto">
-        <form action="{% url 'Accounts:login' %}" method="post">
+<div class=" flex ">
+    <div class="form rounded-lg border border-blue-900  my-5 p-5 mx-auto">
+        <form action="{% url 'Accounts:activation_email' %}" method="post">
             {% csrf_token %}
-            <h2 class=" text-center font-extrabold text-2xl text-purple-900 m-5">LOGIN</h2>
+            <h2 class=" text-center font-extrabold text-2xl text-purple-900 m-5">ACCOUNT ACTIVATION</h2>
             <div class="email">
                 <label for="email" class="text-sm font-bold mt-5">Email Address:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
                     class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
             </div>
-            <div class="password">
-                <label for="password" class="text-sm font-bold mt-5">Password:</label><br>
-                <input name="password" type="password" required placeholder="Enter your password"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
-            </div>
-            <div class="submit_btn my-3 flex justify-between ">
+            <div class="submit_btn my-3 flex justify-center ">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
-                bg-purple-700 hover:bg-purple-900">Submit</button>
-                <a href="{% url 'Accounts:forgot_password' %}"
-                    class="font-semibold text-blue-900 hover:underline">Forgot Password?</a>
+                bg-green-600 hover:bg-green-700">Generate Link</button>
+                
             </div>
             <div class="register">
                 Don't have an account ?

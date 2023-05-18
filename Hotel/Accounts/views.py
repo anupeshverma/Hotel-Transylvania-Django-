@@ -31,26 +31,26 @@ def userlogin(request):
 
         user_account = userAccount.objects.filter(email=email)
         if user_account:
-            # print(user_account)
+            # If user is in admin user and is active
             if User.objects.filter(username=email).first().is_active:
                 user = authenticate(username=email, password=password)
-                # print(user)
                 if user is not None:
                     login(request, user)
                     return redirect("home")
                 else:
                     return render(
-                        request, "login.html", {"error": "Invalid E-mail or Password"}
+                        request, "login.html", {"error": "Invalid Email or Password"}
                     )
+            # If the user is in database but not active
             else:
                 return render(
                     request,
-                    "error_page.html",
+                    "activation_email.html",
                     {"error": "Your account is not Active. Activate First"},
                 )
         else:
             return render(
-                request, "login.html", {"error": "Invalid E-mail or Password"}
+                request, "login.html", {"error": "No user exist with this Email."}
             )
 
 
@@ -110,7 +110,7 @@ def userSignup(request):
         user.is_active = False
 
         current_site = get_current_site(request)
-        mail_subject = "Activation link has been sent to your email id"
+        mail_subject = "Activation link has been sent to your email."
         message = render_to_string(
             "email_activation.html",
             {
@@ -146,7 +146,7 @@ def userSignup(request):
         return render(
             request,
             "error_page.html",
-            {"error": "Please confirm your email address to complete the registration"},
+            {"error": "Please confirm your email address to activate youe account."},
         )
 
 
@@ -180,6 +180,46 @@ def activate(request, uidb64, token):
             request, "error_page.html", {"error": "Activation Link Is Invalid."}
         )
 
+
+def activationEmail(request):
+    if request.method == "GET":
+        return render(request, "activation_email.html")
+    if request.method == "POST":
+        email = request.POST.get("email")
+        user = User.objects.get(username=email)
+        if user.is_active == False:
+            current_site = get_current_site(request)
+            mail_subject = "Activation link has been sent to your Email."
+            message = render_to_string(
+                "email_activation.html",
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": account_activation_token.make_token(user),
+                },
+            )
+            to_email = email
+            email = EmailMessage(mail_subject, message, to=[to_email])
+            try:
+                email.send()
+            except BadHeaderError:
+                return HttpResponseServerError(
+                    "An error occurred while sending the email. Please try again later."
+                )
+            return render(
+                request,
+                "error_page.html",
+                {
+                    "error": "Please confirm your email address to activate the account"
+                },
+            )
+        else:
+            return render(
+                request,
+                "error_page.html",
+                {"error": "Account is already activated. Try LogIn."},
+            )
 
 class profile(LoginRequiredMixin, View):
     def get(self, request):
@@ -289,7 +329,7 @@ def editPhoto(request):
     return render(request, "profile_page.html", {"acc": user_account})
 
 
-def change_password(request):
+def changePassword(request):
     if request.method == "GET":
         return render(request, "change_password.html")
 
@@ -320,7 +360,7 @@ def change_password(request):
         return redirect("Accounts:profile")
 
 
-def forgot_password(request):
+def forgotPassword(request):
     if request.method == "GET":
         return render(request, "forgot_password.html")
     if request.method == "POST":
@@ -358,7 +398,7 @@ def forgot_password(request):
                     )
 
 
-def otp_verification(request):
+def otpVerification(request):
     if request.method == "GET":
         otp = random.randint(100000, 999999)
         request.session["otp"] = otp

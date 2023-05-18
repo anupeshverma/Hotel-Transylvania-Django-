@@ -2,20 +2,20 @@
 {% block body %}
 
 {% if request.method == 'POST' %}
-    
-    {%if error == 1 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Email already in use !</p>
 
-    {% elif error == 2 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Passwords Do Not Match !</p>
-    
-    {% elif error == 3 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Passwords length should be greater than 8 !</p>
-    
-    {% elif error == 4 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Fill the fields appropriately !</p>
-      {% endif %}  
-    
+{%if error == 1 %}
+<p class="mt-5 text-center text-lg font-bold text-red-600">Email already in use !</p>
+
+{% elif error == 2 %}
+<p class="mt-5 text-center text-lg font-bold text-red-600">Passwords Do Not Match !</p>
+
+{% elif error == 3 %}
+<p class="mt-5 text-center text-lg font-bold text-red-600">Passwords length should be greater than 8 !</p>
+
+{% elif error == 4 %}
+<p class="mt-5 text-center text-lg font-bold text-red-600">Fill the fields appropriately !</p>
+{% endif %}
+
 {% endif %}
 
 <div class="edit-container flex  ">
@@ -27,28 +27,36 @@
                 <label for="first_name" class="text-sm font-bold mt-5">First Name:</label><br>
                 <input name="fname" type="text" required placeholder="Enter first name"
                     class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
-                     value="{{ acc.first_name }}" >
+                    value="{{ acc.first_name }}">
             </div>
 
             <div class="last_name">
                 <label for="last_name" class="text-sm font-bold mt-5">Last Name:</label><br>
                 <input name="lname" type="text" required placeholder="Enter last name"
                     class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
-                     value="{{ acc.last_name }}" >
+                    value="{{ acc.last_name }}">
             </div>
 
             <div class="email">
                 <label for="email" class="text-sm font-bold mt-5">Email Address:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center" value="{{ acc.email }}" >
+                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    value="{{ acc.email }}">
             </div>
 
             <div class="number">
                 <label for="contact-no" class="text-sm font-bold mt-5">Contact No.:</label><br>
                 <input name="contact" type="text" placeholder="Enter your contact number"
                     class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
-                     value="{{ acc.phone_number }}" >
+                    value="{{ acc.phone_number }}">
             </div>
+            
+            {% comment %}
+            {% if acc.role == "Human" %}
+            if you remove the space besides double equal to, it will show error. Don't know why.
+            It may be a syntax rule.
+            {% endcomment %}
+                
             <div class="role">
                 <label for="role" class="text-sm font-bold mt-5">Register As:</label><br>
                 <select id="role" name="role" required
