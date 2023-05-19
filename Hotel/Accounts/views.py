@@ -20,6 +20,9 @@ import random
 import os
 
 
+def checkrender(request):
+    return render(request, 'activation_email.html')
+
 # Create your views here.
 def userlogin(request):
     if request.method == "GET":
@@ -262,6 +265,7 @@ def editProfile(request):
         user_admin.first_name = request.POST.get("fname")
         user_admin.last_name = request.POST.get("lname")
         user_admin.username = request.POST.get("email")
+        user_admin.save()
         return redirect("Accounts:profile")
 
 

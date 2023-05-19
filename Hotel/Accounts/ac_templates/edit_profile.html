@@ -19,35 +19,36 @@
 {% endif %}
 
 <div class="edit-container flex  ">
-    <div class="edit-form rounded-lg border border-blue-900  my-5 p-5 w-1/2 mx-auto">
+    <div class="edit-form box_shadow text-white rounded-lg border border-blue-900  my-5 p-5 w-1/2 mx-auto">
         <form action="{% url 'Accounts:edit_profile' %}" method="post">
             {% csrf_token %}
-            <h2 class=" text-center font-extrabold text-2xl text-purple-900 mb-5">Edit Profile</h2>
+            <h2 class="text_shadow text-center font-extrabold text-2xl text-purple-500 mb-5">Edit Profile</h2>
+            <hr class="m-4">
             <div class="first_name">
                 <label for="first_name" class="text-sm font-bold mt-5">First Name:</label><br>
                 <input name="fname" type="text" required placeholder="Enter first name"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black font-semibold text-center"
                     value="{{ acc.first_name }}">
             </div>
 
             <div class="last_name">
                 <label for="last_name" class="text-sm font-bold mt-5">Last Name:</label><br>
                 <input name="lname" type="text" required placeholder="Enter last name"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black font-semibold text-center"
                     value="{{ acc.last_name }}">
             </div>
 
             <div class="email">
                 <label for="email" class="text-sm font-bold mt-5">Email Address:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black font-semibold text-center"
                     value="{{ acc.email }}">
             </div>
 
             <div class="number">
                 <label for="contact-no" class="text-sm font-bold mt-5">Contact No.:</label><br>
                 <input name="contact" type="text" placeholder="Enter your contact number"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black font-semibold text-center"
                     value="{{ acc.phone_number }}">
             </div>
             
@@ -60,7 +61,7 @@
             <div class="role">
                 <label for="role" class="text-sm font-bold mt-5">Register As:</label><br>
                 <select id="role" name="role" required
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-black text-center">
                     <option value="" hidden>Select role</option>
                     <option value="Human" {% if acc.role == "Human" %} selected {% endif %}>Human</option>
                     <option value="Monster" {% if acc.role == "Monster" %} selected {% endif %}>Monster</option>

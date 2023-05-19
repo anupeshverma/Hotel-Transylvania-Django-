@@ -4,14 +4,15 @@
 {% if request.method == 'POST' %} <p class="mt-5 text-center text-lg font-bold text-red-500">{{ error }}</p> {% endif %}
 
 <div class="otp-container flex ">
-    <div class="otp-form rounded-lg border border-blue-900  my-5 p-5 mx-auto">
-        <form action="{% url 'Accounts:otp_verification'6%}" method="post">
+    <div class="otp-form box_shadow text-white rounded-lg border border-blue-900  my-5 p-5 mx-auto">
+        <form action="{% url 'Accounts:otp_verification'%}" method="post">
             {%csrf_token%}
-            <h2 class=" text-center font-extrabold text-2xl text-purple-900 m-5">OTP Verification</h2>
+            <h2 class="text_shadow text-center font-extrabold text-2xl text-purple-500 m-5">OTP Verification</h2>
+            <hr class="m-4">
             <div class="otp">
                 <label for="otp" class="text-sm font-bold mt-5">Enter OTP:</label><br>
                 <input name="otp" type="number" required placeholder="Enter OTP Sent To Email"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black text-center font-semibold">
             </div>
 
             <div class="submit_btn my-3 flex justify-between ">

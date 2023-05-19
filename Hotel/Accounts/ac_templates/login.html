@@ -4,29 +4,30 @@
 {% if request.method == 'POST' %} <p class="mt-5 text-center text-lg font-bold text-red-600">{{ error }}</p> {% endif %}
 
 <div class="login-container flex ">
-    <div class="login-form rounded-lg border border-blue-900  my-5 p-5 mx-auto">
+    <div class="login-form text-white box_shadow rounded-lg border border-blue-900  my-5 p-5 mx-auto">
         <form action="{% url 'Accounts:login' %}" method="post">
             {% csrf_token %}
-            <h2 class=" text-center font-extrabold text-2xl text-purple-900 m-5">LOGIN</h2>
+            <h2 class="form_heading">LOGIN</h2>
+            <hr class="mb-10 mx-10">
             <div class="email">
-                <label for="email" class="text-sm font-bold mt-5">Email Address:</label><br>
+                <label for="email" class="form_label">Email Address:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black text-center font-semibold">
             </div>
             <div class="password">
-                <label for="password" class="text-sm font-bold mt-5">Password:</label><br>
+                <label for="password" class="form_label">Password:</label><br>
                 <input name="password" type="password" required placeholder="Enter your password"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black text-center">
             </div>
             <div class="submit_btn my-3 flex justify-between ">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
                 bg-purple-700 hover:bg-purple-900">Submit</button>
                 <a href="{% url 'Accounts:forgot_password' %}"
-                    class="font-semibold text-blue-900 hover:underline">Forgot Password?</a>
+                    class="font-semibold text-orange-200 hover:underline hover:text-orange-300">Forgot Password?</a>
             </div>
             <div class="register">
                 Don't have an account ?
-                <a href="{% url 'Accounts:signup' %}" class="hover:underline font-semibold">Register</a> Here!
+                <a href="{% url 'Accounts:signup' %}" class="text-orange-200 hover:underline font-semibold">Register</a> Here!
             </div>
         </form>
     </div>

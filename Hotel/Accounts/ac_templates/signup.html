@@ -21,56 +21,58 @@
     
 
 <div class="signup-container flex ">
-    <div class="signup-form rounded-lg border border-blue-900 w-1/2 my-5 p-5 mx-auto">
+    <div class="signup-form box_shadow text-white rounded-lg border border-blue-900 w-2/3 md:w-7/12 my-5 px-10 py-5 mx-auto">
         <form action="{% url 'Accounts:signup' %}" method="post">
             {% csrf_token %}
-            <h2 class=" text-center font-extrabold text-2xl text-purple-900 mb-5">CREATE ACCOUNT</h2>
+            <h2 class="form_heading">CREATE ACCOUNT</h2>
+            <hr class="mb-10 mx-10">
             <div class="first_name">
-                <label for="first_name" class="text-sm font-bold mt-5">First Name*:</label><br>
+                <label for="first_name" class="form_label">First Name*:</label><br>
                 <input name="fname" type="text" required placeholder="Enter first name"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="form_input"
                     {% if request.method == 'POST' %} value="{{ fname }}" {% endif %}>
             </div>
 
             <div class="last_name">
-                <label for="last_name" class="text-sm font-bold mt-5">Last Name*:</label><br>
+                <label for="last_name" class="form_label">Last Name*:</label><br>
                 <input name="lname" type="text" required placeholder="Enter last name"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="form_input"
                     {% if request.method == 'POST' %} value="{{ lname }}" {% endif %}>
             </div>
 
             <div class="email">
-                <label for="email" class="text-sm font-bold mt-5">Email Address*:</label><br>
+                <label for="email" class="form_label">Email Address*:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="form_input"
                     {% if request.method == 'POST' %} value="{{ email }}" {% endif %}>
             </div>
 
             <div class="number">
-                <label for="contact-no" class="text-sm font-bold mt-5">Contact No.:</label><br>
+                <label for="contact-no" class="form_label">Contact No.:</label><br>
                 <input name="contact" type="text" placeholder="Enter your contact number"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center"
+                    class="form_input"
                     {% if request.method == 'POST' %} value="{{ contact }}" {% endif %}>
             </div>
             <div class="role">
-                <label for="role" class="text-sm font-bold mt-5">Register As*:</label><br>
+                <label for="role" class="form_label">Register As*:</label><br>
                 <select id="role" name="role" required
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
                     <option value="" hidden>Select role</option>
-                    <option value="Human" {% if role == "Human" %} selected {% endif %}>Human</option>
-                    <option value="Monster" {% if role == "Monster" %} selected {% endif %}>Monster</option>
+                    <option value="Human" {% if role == "Human" %} selected {% endif %} class="bg-black">Human</option>
+                    <option value="Monster" {% if role == "Monster" %} selected {% endif %} class="bg-black     
+                     ">Monster</option>
                 </select>
             </div>
             <div class="password">
-                <label for="password" class="text-sm font-bold mt-5">Password:</label><br>
+                <label for="password" class="form_label">Password:</label><br>
                 <input name="password" type="password" required placeholder="Enter your password"
-                    class=" px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
-                    <p class="mb-3 text-xs text-gray-800">&nbsp;*Password must contain alteast one capital letter, one small letter, one number and a special character.</p>
+                    class="form_input">
             </div>
             <div class="confirm-password">
-                <label for="confirm-password" class="text-sm font-bold mt-5">Confirm Password:</label><br>
+                <label for="confirm-password" class="form_label">Confirm Password:</label><br>
                 <input name="confirm_password" type="password" required placeholder="Enter your password again"
-                    class="mb-3 px-2 py-1 w-full rounded-sm border border-purple-900 text-center">
+                    class="form_input">
+                    <p class="mb-3 text-xs text-red-500">&nbsp;*Password must contain alteast one capital letter, one small letter, one number and a special character.</p>
             </div>
             <div class="submit_btn my-3">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
@@ -78,7 +80,7 @@
             </div>
             <div class="register text-center">
                 Already have an account?
-                <a href="{% url 'Accounts:login' %}" class="hover:underline font-semibold">LogIn</a> Here!
+                <a href="{% url 'Accounts:login' %}" class=" text-orange-200 hover:underline font-semibold">LogIn</a> Here!
             </div>
         </form>
     </div>

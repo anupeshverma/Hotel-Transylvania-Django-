@@ -17,4 +17,5 @@ urlpatterns = [
     path('ChangePassword/', changePassword, name='change_password'),
     path('ForgotPassword/', forgotPassword, name='forgot_password'),
     path('OTPVerification/', otpVerification, name='otp_verification'),
+    path('CheckRender/', checkrender, name='check'),
 ]
