@@ -7,9 +7,11 @@
 
 :root {
     --font-style: 'Nunito Sans', sans-serif;
-    --light_color: #cbbddb;
-    --mid_color: #8f7cec;
     --dark_color: #242026;
+}
+
+.bg-mid_color{
+    background: #35273c;
 }
 
 #navbar-logo {

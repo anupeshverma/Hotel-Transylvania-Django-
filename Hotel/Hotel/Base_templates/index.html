@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block body %}
-    <button ><a href="{% url 'Accounts:check' %}">Check</a></button>
+    <button class=" bg-red-600"><a href="{% url 'Accounts:check' %}">Check</a></button>
+
+    <div class="cover-video h-48 overflow-hidden outline outline-white">
+        <video autoplay loop muted id="video-bg" class="w-full object-cover -z-50 overflow-hidden">
+            <source src="{% static 'cover-video.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- --------- FACILITIES --------- -->
+    <section id="facilities-container" class="bg-mid_color text-center text-white">
+        <h1 class="m-3 text-center text-2xl font-bold">Our Facilities</h1>
+        <div class="p-3 flex justify-around">
+            <div class="flex flex-col items-center">
+                <img src="https://img.icons8.com/arcade/512/coins.png" alt="coins" class="w-12">
+                <br>
+                Best Rates
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/512/external-Tag-international-women's-day-smashingstocks-flat-smashing-stocks.png"
+                    alt="Tags" class="w-12">
+                <br>
+                No hidden charges
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="https://img.icons8.com/flat-round/512/wifi.png" alt="Wifi" class="w-12">
+                <br>
+                Free Wifi
+            </div>
+            <div class="flex flex-col items-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/867/867968.png" alt="Food" class="w-12">
+                <br>
+                Food Service Available
+            </div>
+        </div>
+    </section>
 {% endblock body %}
     
