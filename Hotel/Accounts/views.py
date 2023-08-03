@@ -243,9 +243,11 @@ class profile(LoginRequiredMixin, View):
         if not user_account:
             logout(request)
             return render(request, "error_page.html", {"error": "No Profile Found"})
-
+        
+        # bookings = roomBooking.objects.filter(user=user_account).order_by('-booking_date')
+        bookings = 0
         user_account = user_account[0]
-        return render(request, "profile_page.html", {"acc": user_account})
+        return render(request, "profile_page.html", {"acc": user_account, "bookings": bookings})
 
 
 def editProfile(request):
@@ -405,6 +407,7 @@ def forgotPassword(request):
                 otp = random.randrange(100000, 999999)
                 request.session["otp"] = otp
 
+                # Send email
                 message = f"Hi {user_account.first_name},\n\nYour OTP for reset password is {otp}. Do not share it with anyone."
                 mail_subject = "Reset Password OTP"
                 email = EmailMessage(mail_subject, message, to=[user_account.email])

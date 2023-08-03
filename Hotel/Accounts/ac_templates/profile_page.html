@@ -23,7 +23,7 @@
     <form action="{% url 'Accounts:edit_photo' %}" enctype="multipart/form-data" method="post"
         class="input_photo text-white hidden">
         {% csrf_token %}
-        <input name="profile_photo" type="file" accept=".jpg, .jpeg, .png, .">
+        <input name="profile_photo" type="file" accept=".jpg, .jpeg, .png, ." required>
         <button type="submit" class="rounded-sm border border-blue-500 px-1 ">Upload</button><br>
         <p class="text-red-600 text-xs">*Image should be in .jpg, .jpeg or .png format.</p>
     </form>
@@ -47,6 +47,35 @@
     </div>
 </div>
 
+<!-- YOUR BOOKINGS -->
+<div class="bg-black bookings m-5 border-spacing-2 border-white rounded-lg">
+    <p class="p-2 text-lg text-white font-bold bg-blue-500 rounded-sm">Your Bookings</p>
+    {% if bookings|length == 0 %}
+    <p class="text-white mx-3 p-3">You have not made any booking yet!</p>
+    {% else %}
+    <!-- TABLE OF BOOKING DETAILS-->
+    <table id='bookingTable'>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Booking Date</th>
+                <!-- Add other header columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <!-- Add other columns with booking details -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+<!-- BUTTONS -->
 <div class="m-2 buttons flex justify-center">
     <button class="mx-5 p-2 font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-md"><a
             href="{% url 'Accounts:logout' %} ">LogOut</a></button>
