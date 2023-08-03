@@ -66,51 +66,57 @@
   <div
     class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4"
   >
+    <!-- rooms div goes here  -->
+
+    {% for room in roomData %}
+
     <div
       class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4"
     >
       <img
         alt="Home"
-        src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        src="{% if room.img %}{{ room.img.url }}{% endif %}"
         class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
       />
 
       <div class="mt-2">
-        <!-- description -->
-        <div class="description mt-2 relative">
-          <div
-            class="description-text line-clamp-2"
-            title="{{ room.description }}"
-          >
-            <span class="text-m font-medium text-white">Description :</span>
-            <span class="text-sm text-gray-500"> {{ room.description}} </span>
-          </div>
-        </div>
+       
       </div>
 
       <div class="flex justify-between md:flex-col">
         <div class="flex capacity flex-col md:flex-row mt-1">
-          <div class="text-m font-medium text-white">Capacity :</div>
-          <div class="text-sm font-medium text-white">Single</div>
+          <div class="text-sm font-medium text-white">Capacity : &nbsp;</div>
+          <div class="text-sm font-medium text-white">{{room.capacity}}</div>
         </div>
-        <div class="rating flex flex-col md:flex-row mt-1" >
-          <div class="text-m font-medium text-white">Rating : </div>
-          <div class="text-sm font-medium text-white">4.4</div>
+        <div class="rating flex flex-col md:flex-row mt-1">
+          <div class="text-sm font-medium text-white">Rating :&nbsp;</div>
+          <div class="text-sm font-medium text-white">{{room.rating}}</div>
         </div>
         <div class="price flex flex-col md:flex-row mt-1">
-          <div class="text-m font-medium text-white">Price:</div>
-          <div class="text-sm font-medium text-white">Rs. 4000</div>
+          <div class="text-sm font-medium text-white">Price :&nbsp;</div>
+          <div class="text-sm font-medium text-white">Rs. {{room.price}}</div>
         </div>
+         <!-- description -->
+         <div class="description mt-2 relative">
+            <div
+              class="description-text line-clamp-2"
+              
+            >
+              <span class="text-m font-medium text-white">Description :</span>
+              <span class="text-sm text-gray-500"> {{ room.description}} </span>
+            </div>
+          </div>
         <div class="book mt-1 flex justify-center">
           <a
             class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
             href=""
           >
-           Book Now
+            Book Now
           </a>
         </div>
       </div>
     </div>
+    {%endfor%}
   </div>
 </section>
 
