@@ -21,7 +21,8 @@ import os
 
 
 def checkrender(request):
-    return render(request, 'activation_email.html')
+    return render(request, "change_password.html")
+
 
 # Create your views here.
 def userlogin(request):
@@ -184,12 +185,21 @@ def activate(request, uidb64, token):
         )
 
 
-def activationEmail(request):
+def resendActivationEmail(request):
     if request.method == "GET":
-        return render(request, "activation_email.html")
+        return render(request, "resend_activation_email.html")
+
     if request.method == "POST":
         email = request.POST.get("email")
-        user = User.objects.get(username=email)
+        try:
+            user = User.objects.get(username=email)
+        except User.DoesNotExist:
+            return render(
+                request,
+                "error_page.html",
+                {"error": "No account exists with this email. Sign up first."},
+            )
+        # If user is found and not active
         if user.is_active == False:
             current_site = get_current_site(request)
             mail_subject = "Activation link has been sent to your Email."
@@ -217,12 +227,14 @@ def activationEmail(request):
                     "error": "Please confirm your email address to activate the account"
                 },
             )
+        # User exist and account is already activatedd.
         else:
             return render(
                 request,
                 "error_page.html",
                 {"error": "Account is already activated. Try LogIn."},
             )
+
 
 class profile(LoginRequiredMixin, View):
     def get(self, request):
@@ -335,6 +347,8 @@ def editPhoto(request):
 
 def changePassword(request):
     if request.method == "GET":
+        if not request.user.is_authenticated:
+            return render(request, "login.html", {"error": "LogIn to account first !"})
         return render(request, "change_password.html")
 
     if request.method == "POST":
@@ -367,6 +381,7 @@ def changePassword(request):
 def forgotPassword(request):
     if request.method == "GET":
         return render(request, "forgot_password.html")
+    
     if request.method == "POST":
         email = request.POST.get("email")
         request.session["email"] = email
@@ -395,7 +410,7 @@ def forgotPassword(request):
                 email = EmailMessage(mail_subject, message, to=[user_account.email])
                 try:
                     email.send()
-                    return render(request, "change_password.html")
+                    return render(request, "otp_verification.html")
                 except BadHeaderError:
                     return HttpResponseServerError(
                         "An error occurred while sending the email. Please try again later."
