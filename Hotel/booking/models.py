@@ -2,10 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+def get_room_image_upload_path(instance, filename):
+    return f'room_images/{instance.capacity}/{instance.number}/{filename}'
+
+
 
 class Room(models.Model):
     id = models.AutoField(primary_key=True)  # AutoField is used by default for primary keys
-    img = models.ImageField(upload_to='room_images/')  
+    img = models.ImageField(upload_to=get_room_image_upload_path)  
     CAPACITY_CHOICES = [
         ('Single', 'Single'),
         ('Double', 'Double'),
