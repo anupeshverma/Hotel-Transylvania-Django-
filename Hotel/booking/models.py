@@ -11,11 +11,15 @@ class Room(models.Model):
         ('Double', 'Double'),
         ('Triple', 'Triple'),
     ]
+    number=models.IntegerField(default=1)
     capacity = models.CharField(max_length=10, choices=CAPACITY_CHOICES)
     price = models.IntegerField()
     description = models.CharField(max_length=200)
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
 
     def __str__(self):
-        return f"Room {self.id}"
+        return f"{self.capacity[0].upper()}{self.number} "
+
+
+
  
