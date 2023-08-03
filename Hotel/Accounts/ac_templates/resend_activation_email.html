@@ -5,7 +5,7 @@
 
 <div class=" flex ">
     <div class="form box_shadow text-white rounded-lg border border-blue-900  my-5 p-5 mx-auto">
-        <form action="{% url 'Accounts:activation_email' %}" method="post">
+        <form action="{% url 'Accounts:resend_activation_email' %}" method="post">
             {% csrf_token %}
             <h2 class="form_heading">ACCOUNT ACTIVATION</h2>
             <hr class="m-4">
