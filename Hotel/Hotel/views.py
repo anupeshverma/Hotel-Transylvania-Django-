@@ -1,4 +1,8 @@
 from django.shortcuts import render, redirect
-
+from booking.models import Room
 def home(request):
-    return render(request, 'index.html')
+    roomData=Room.objects.all()
+
+    data={'roomData':roomData}
+
+    return render(request, 'index.html',data)

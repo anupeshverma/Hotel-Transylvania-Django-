@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'django_browser_reload',
     'Accounts',
+    'booking',
 ]
 
 
@@ -75,6 +76,7 @@ TEMPLATES = [
         'DIRS': [
              os.path.join(BASE_DIR, 'Hotel', 'Base_templates'),
              os.path.join(BASE_DIR, 'Accounts', 'ac_templates'),
+             os.path.join(BASE_DIR, 'booking', 'booking_templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

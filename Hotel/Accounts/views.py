@@ -293,7 +293,7 @@ def deleteProfile(request):
         user_account = userAccount.objects.filter(email=request.user.username)
         user_account = user_account[0]
         # sent the mail to the user
-        message = f"Hi {user_account.first_name},\n\nYour OTP for account deletion is {otp}. Do not share it with anyone."
+        message = f"Hi {user_account.first_name}c,\n\nYour OTP for acount deletion is {otp}. Do not share it with anyone."
         mail_subject = "Account Deletion Confirmation OTP"
         email = EmailMessage(mail_subject, message, to=[user_account.email])
         try:
