@@ -60,7 +60,7 @@
 
 <!-- room section  -->
 
-<section class="m-3 p-3">
+<section id ="Room Section" class="m-3 p-3">
   <h1 class="m-3 text-center text-4xl font-bold bg-blue-500">Special Rooms</h1>
 
   <div
@@ -118,6 +118,56 @@
     </div>
     {%endfor%}
   </div>
+</section>
+
+<div class="fly_bat">
+    <img src="{% static 'gifs/fly_bat.gif' %}" />
+</div>
+<!-- WHAT PEOPLE SAYS -->
+<section id="What_People_Says">
+    <div class="people_says">
+        <h1 class="text-white text-4xl">What People Says</h1>
+        <div class="people">
+            <div class="dp_left">
+                <img src="{% static 'images/default_monster.png' %}" />
+            </div>
+            <div class="quote_left">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
+                facilis.
+                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
+                eveniet eos atque. Esse quaerat et praesentium enim!
+                <br>
+                <h4 align="right">~Monster 1</h4>
+            </div>
+        </div>
+        <div class="people people_right">
+            <div class="quote_right">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
+                facilis.
+                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
+                eveniet eos atque. Esse quaerat et praesentium enim!
+                <br>
+                <h4 align="right">~Sumant Kumar Shah</h4>
+            </div>
+            <div class="dp_right">
+                <img src="{% static 'images/default_human.png' %}" />
+            </div>
+        </div>
+
+        <div class="people">
+            <div class="dp_left">
+                <img class="left_img" src="{% static 'images/default_monster.png' %}" />
+            </div>
+            <div class="quote_left">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
+                facilis.
+                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
+                eveniet eos atque. Esse quaerat et praesentium enim!
+                <br>
+                <h4 align="right">~Monster 2</h4>
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock body %}

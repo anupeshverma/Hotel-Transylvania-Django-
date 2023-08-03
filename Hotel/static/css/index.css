@@ -1,0 +1,68 @@
+.fly_bat img {
+    width: 100px;
+    position: absolute;
+    margin-left: 100px;
+}
+
+/* <------WHAT PEOPLE SAYS----------> */
+.people_says {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+/* .people_says h1 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: var(--mid_color);
+    font-weight: 800;
+    font-size: 35px;
+} */
+
+.people {
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: justify;
+    overflow-y: inherit;
+}
+
+.people .dp_left img {
+    margin: 10px;
+    width: 500px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px inset rgb(157, 12, 180);
+    box-shadow: 5px 5px 5px rgb(181, 88, 227, 0.5);
+}
+
+.people .dp_right img {
+    margin: 10px;
+    width: 500px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px outset rgb(157, 12, 180);
+    box-shadow: -8px 5px 5px rgb(181, 88, 227, 0.5);
+}
+
+.people .quote_left {
+    margin: 5px 60px 5px 5px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 8px 5px 5px rgb(181, 88, 227, 0.5);
+}
+
+.people .quote_right {
+    margin: 5px 5px 5px 60px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: -8px 5px 5px rgb(181, 88, 227, 0.5);
+}

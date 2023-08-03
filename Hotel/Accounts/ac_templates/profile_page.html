@@ -7,7 +7,7 @@
         {% if acc.profile_pic and acc.profile_pic.url %}
         <img src="{{acc.profile_pic.url}}" alt="profile" id="profile_pic" class="w-32 h-32 rounded-full border-4">
         {% else %}
-        {% if accc.role == 'Human' %}
+        {% if acc.role == 'Human' %}
         <img src="{% static 'images/default_human.png' %}" alt="Human" id="profile_pic"
             class="w-32 h-32 rounded-full border-4">
         {% else %}
