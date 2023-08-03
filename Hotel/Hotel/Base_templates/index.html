@@ -1,40 +1,117 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block body %}
-    <button class=" bg-red-600"><a href="{% url 'Accounts:check' %}">Check</a></button>
+{% extends 'base.html' %} {% load static %} {% block body %}
+<button class="bg-red-600">
+  <a href="{% url 'Accounts:check' %}">Check</a>
+</button>
 
-    <div class="cover-video h-48 overflow-hidden outline outline-white">
-        <video autoplay loop muted id="video-bg" class="w-full object-cover -z-50 overflow-hidden">
-            <source src="{% static 'cover-video.mp4' %}" type="video/mp4">
-        </video>
+<div class="cover-video h-48 overflow-hidden outline outline-white">
+  <video
+    autoplay
+    loop
+    muted
+    id="video-bg"
+    class="w-full object-cover -z-50 overflow-hidden"
+  >
+    <source src="{% static 'cover-video.mp4' %}" type="video/mp4" />
+  </video>
+</div>
+
+<!-- --------- FACILITIES --------- -->
+<section id="facilities-container" class="bg-mid_color text-center text-white">
+  <h1 class="m-3 text-center text-2xl font-bold">Our Facilities</h1>
+  <div class="p-3 flex justify-around">
+    <div class="flex flex-col items-center">
+      <img
+        src="https://img.icons8.com/arcade/512/coins.png"
+        alt="coins"
+        class="w-12"
+      />
+      <br />
+      Best Rates
     </div>
+    <div class="flex flex-col items-center">
+      <img
+        src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/512/external-Tag-international-women's-day-smashingstocks-flat-smashing-stocks.png"
+        alt="Tags"
+        class="w-12"
+      />
+      <br />
+      No hidden charges
+    </div>
+    <div class="flex flex-col items-center">
+      <img
+        src="https://img.icons8.com/flat-round/512/wifi.png"
+        alt="Wifi"
+        class="w-12"
+      />
+      <br />
+      Free Wifi
+    </div>
+    <div class="flex flex-col items-center">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/867/867968.png"
+        alt="Food"
+        class="w-12"
+      />
+      <br />
+      Food Service Available
+    </div>
+  </div>
+</section>
 
-    <!-- --------- FACILITIES --------- -->
-    <section id="facilities-container" class="bg-mid_color text-center text-white">
-        <h1 class="m-3 text-center text-2xl font-bold">Our Facilities</h1>
-        <div class="p-3 flex justify-around">
-            <div class="flex flex-col items-center">
-                <img src="https://img.icons8.com/arcade/512/coins.png" alt="coins" class="w-12">
-                <br>
-                Best Rates
-            </div>
-            <div class="flex flex-col items-center">
-                <img src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/512/external-Tag-international-women's-day-smashingstocks-flat-smashing-stocks.png"
-                    alt="Tags" class="w-12">
-                <br>
-                No hidden charges
-            </div>
-            <div class="flex flex-col items-center">
-                <img src="https://img.icons8.com/flat-round/512/wifi.png" alt="Wifi" class="w-12">
-                <br>
-                Free Wifi
-            </div>
-            <div class="flex flex-col items-center">
-                <img src="https://cdn-icons-png.flaticon.com/512/867/867968.png" alt="Food" class="w-12">
-                <br>
-                Food Service Available
-            </div>
+<!-- room section  -->
+
+<section class="m-3 p-3">
+  <h1 class="m-3 text-center text-4xl font-bold bg-blue-500">Special Rooms</h1>
+
+  <div
+    class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4"
+  >
+    <div
+      class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4"
+    >
+      <img
+        alt="Home"
+        src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
+      />
+
+      <div class="mt-2">
+        <!-- description -->
+        <div class="description mt-2 relative">
+          <div
+            class="description-text line-clamp-2"
+            title="{{ room.description }}"
+          >
+            <span class="text-m font-medium text-white">Description :</span>
+            <span class="text-sm text-gray-500"> {{ room.description}} </span>
+          </div>
         </div>
-    </section>
+      </div>
+
+      <div class="flex justify-between md:flex-col">
+        <div class="flex capacity flex-col md:flex-row mt-1">
+          <div class="text-m font-medium text-white">Capacity :</div>
+          <div class="text-sm font-medium text-white">Single</div>
+        </div>
+        <div class="rating flex flex-col md:flex-row mt-1" >
+          <div class="text-m font-medium text-white">Rating : </div>
+          <div class="text-sm font-medium text-white">4.4</div>
+        </div>
+        <div class="price flex flex-col md:flex-row mt-1">
+          <div class="text-m font-medium text-white">Price:</div>
+          <div class="text-sm font-medium text-white">Rs. 4000</div>
+        </div>
+        <div class="book mt-1 flex justify-center">
+          <a
+            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+            href=""
+          >
+           Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock body %}
-    
