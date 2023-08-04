@@ -6,5 +6,6 @@ app_name = 'booking'
 urlpatterns = [
     # Add your other URL patterns here...
     path('booking/<str:room_type>/<int:room_number>/', views.booking, name='booking_form'),
+    path('showRooms/', views.showRooms, name='showRooms'),
     # ...
 ]

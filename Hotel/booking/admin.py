@@ -4,5 +4,6 @@ from booking.models import *
 
 
 admin.site.register(Room)
+admin.site.register(RoomType)
 
 

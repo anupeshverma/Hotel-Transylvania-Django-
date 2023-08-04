@@ -14,5 +14,6 @@ urlpatterns = [
     # path('Accounts/', include('Accounts.urls', namespace='Accounts')),
     path('account/', include(('Accounts.urls', 'Accounts'), namespace='Accounts')),
     path('booking/', include(('booking.urls', 'booking'), namespace='booking')),
+    #  path('booking/showRooms/', views.showRooms, name='showRooms'),
  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
