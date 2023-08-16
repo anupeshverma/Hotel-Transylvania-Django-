@@ -23,14 +23,12 @@
                     <td class="px-4 py-2 border">{{ admin.first_name }} {{ admin.last_name }}</td>
                     <td class="px-4 py-2 border">{{ admin.phone_number }}</td>
                     <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
-                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
-                            {% csrf_token %}
-                            <button type="submit"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
-                                Edit/Change
-                            </button>
-                        </form>
-                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+
+                        <a href="{% url 'AdminPanel:edit_user' admin.pk %}" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Edit/Change
+                        </a>
+                        <a href="{% url 'AdminPanel:delete_user' admin.pk %}" type="button"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
                             Delete
                         </a>
@@ -62,14 +60,11 @@
                     <td class="px-4 py-2 border">{{ human.first_name }} {{ human.last_name }}</td>
                     <td class="px-4 py-2 border">{{ human.phone_number }}</td>
                     <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
-                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
-                            {% csrf_token %}
-                            <button type="submit"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
-                                Edit/Change
-                            </button>
-                        </form>
-                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+                        <a href="{% url 'AdminPanel:edit_user' human.pk %}" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Edit/Change
+                        </a>
+                        <a href="{% url 'AdminPanel:delete_user' human.pk %}" type="button"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
                             Delete
                         </a>
@@ -104,14 +99,11 @@
                     <td class="px-4 py-2 border">{{ monster.first_name }} {{ monster.last_name }}</td>
                     <td class="px-4 py-2 border">{{ monster.phone_number }}</td>
                     <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
-                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
-                            {% csrf_token %}
-                            <button type="submit"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
-                                Edit/Change
-                            </button>
-                        </form>
-                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+                        <a href="{% url 'AdminPanel:edit_user' monster.pk %}" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Edit/Change
+                        </a>
+                        <a href="{% url 'AdminPanel:delete_user' monster.pk %}" type="button"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
                             Delete
                         </a>

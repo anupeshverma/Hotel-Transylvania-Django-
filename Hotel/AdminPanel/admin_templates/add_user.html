@@ -1,0 +1,72 @@
+{% extends 'admin_dashboard.html'%}
+{% block form %}
+
+
+{% if request.method == 'POST' %}
+    
+    {%if error %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">{{error}}</p>
+      {% endif %}  
+    
+{% endif %}
+    
+
+<div class="signup-container flex ">
+    <div class="signup-form box_shadow text-white rounded-lg border border-blue-900 w-2/3 md:w-7/12 my-5 px-10 py-5 mx-auto">
+        <form action="{% url 'AdminPanel:add_user' %}" method="post">
+            {% csrf_token %}
+            <h2 class="form_heading">ADD USER</h2>
+            <hr class="mb-10 mx-10">
+            <div class="first_name">
+                <label for="first_name" class="form_label">First Name*:</label><br>
+                <input name="fname" type="text" required placeholder="Enter first name"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ fname }}" {% endif %}>
+            </div>
+
+            <div class="last_name">
+                <label for="last_name" class="form_label">Last Name*:</label><br>
+                <input name="lname" type="text" required placeholder="Enter last name"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ lname }}" {% endif %}>
+            </div>
+
+            <div class="email">
+                <label for="email" class="form_label">Email Address*:</label><br>
+                <input name="email" type="email" required placeholder="Enter your email address"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ email }}" {% endif %}>
+            </div>
+
+            <div class="number">
+                <label for="contact-no" class="form_label">Contact No.:</label><br>
+                <input name="contact" type="text" placeholder="Enter your contact number"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ contact }}" {% endif %}>
+            </div>
+            <div class="role">
+                <label for="role" class="form_label">Register As*:</label><br>
+                <select id="role" name="role" required
+                    class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
+                    <option value="" hidden>Select role</option>
+                    <option value="Human" {% if role == "Human" %} selected {% endif %} class="bg-gray-600">Human</option>
+                    <option value="Monster" {% if role == "Monster" %} selected {% endif %} class="bg-gray-600">Monster</option>     
+                    <option value="Admin" {% if role == "Admin" %} selected {% endif %} class="bg-gray-600 ">Admin</option>
+                </select>
+            </div>
+            <div class="password">
+                <label for="password" class="form_label">Password:</label><br>
+                <input name="password" type="password" required placeholder="Enter your password"
+                    class="form_input">
+            </div>
+            
+            <div class="submit_btn my-3">
+                <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
+                bg-purple-700 hover:bg-purple-900">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
