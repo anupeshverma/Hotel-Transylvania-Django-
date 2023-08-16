@@ -1,7 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
+
+  
 <button class="bg-red-600">
-  <a href="{% url 'Accounts:check' %}">Check</a>
+  <a href="{% url 'Rooms:show_all_rooms' %}">Check</a>
 </button>
+
+  
 
 <div class="cover-video h-48 overflow-hidden outline outline-white">
   <video
@@ -68,13 +72,13 @@
   >
     <!-- rooms div goes here  -->
 
-    {% for room in roomType %}
+    {% for room in Rooms %}
     <div
       class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4"
     >
       <img
         alt="Home"
-        src="{% if room.image %}{{ room.image.url }}{% endif %}"
+        src="{% if room. %}{{ room.image.url }}{% endif %}"
         class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
       />
 

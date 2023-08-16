@@ -15,7 +15,7 @@ def user_profile_pic_path(instance, filename):
 class userAccount(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50, primary_key=True)
     phone_number = models.CharField(max_length=50)
     role = models.CharField(max_length=20, default="Human")
     profile_pic = models.ImageField(upload_to=user_profile_pic_path)

@@ -16,6 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import password_validators_help_texts
 from .models import *
+from Booking.models import Booking
 import random
 import os
 
@@ -40,7 +41,12 @@ def userlogin(request):
                 user = authenticate(username=email, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect("home")
+                    next_url = request.GET.get('next')
+                    print(next_url)
+                    if next_url:
+                        return redirect(next_url)
+                    else:
+                        return redirect('home')
                 else:
                     return render(
                         request, "login.html", {"error": "Invalid Email or Password"}
@@ -244,9 +250,8 @@ class profile(LoginRequiredMixin, View):
             logout(request)
             return render(request, "error_page.html", {"error": "No Profile Found"})
         
-        # bookings = roomBooking.objects.filter(user=user_account).order_by('-booking_date')
-        bookings = 0
         user_account = user_account[0]
+        bookings = Booking.objects.filter(user=user_account).order_by('-bookingDate')
         return render(request, "profile_page.html", {"acc": user_account, "bookings": bookings})
 
 

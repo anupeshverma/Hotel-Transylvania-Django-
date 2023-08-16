@@ -48,30 +48,36 @@
 </div>
 
 <!-- YOUR BOOKINGS -->
-<div class="bg-black bookings m-5 border-spacing-2 border-white rounded-lg">
+<div class="bg-gray-900 text-white bookings m-5 border-spacing-2 border-white rounded-lg">
     <p class="p-2 text-lg text-white font-bold bg-blue-500 rounded-sm">Your Bookings</p>
     {% if bookings|length == 0 %}
     <p class="text-white mx-3 p-3">You have not made any booking yet!</p>
     {% else %}
     <!-- TABLE OF BOOKING DETAILS-->
-    <table id='bookingTable'>
-        <thead>
-            <tr>
-                <th>Booking ID</th>
-                <th>Booking Date</th>
-                <!-- Add other header columns as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in bookings %}
-            <tr>
-                <td>{{ booking.id }}</td>
-                <td>{{ booking.booking_date }}</td>
-                <!-- Add other columns with booking details -->
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="text-center">
+        <table id='bookingTable' class="text-center min-w-full">
+            <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-4">Booking ID</th>
+                    <th scope="col" class="px-6 py-4">Booking Date</th>
+                    <th scope="col" class="px-6 py-4">Guest Name</th>
+                    <th scope="col" class="px-6 py-4">Room No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <hr class="bg-white h-1">
+                {% for booking in bookings %}
+                <tr>
+                    <td class="px-6 py-4">{{ booking.id }}</td>
+                    <td class="px-6 py-4">{{ booking.bookingDate }}</td>
+                    <td class="px-6 py-4">{{ booking.guestName }}</td>
+                    <td class="px-6 py-4">{{ booking.roomNo }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% endif %}
 </div>
 

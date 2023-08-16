@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div
+    class="logo bg-gradient-to-b from-red-700 via-red-800 to-gray-800 bg-clip-text text-transparent font-extrabold text-6xl flex text-center justify-center m-2 ">
+    <a href="{% url 'home' %}" id="navbar-logo">Hotel<br>Transylvania</a>
+</div>
+<hr class="m-4">
+<p class="text-white my-4 font-bold text-center text-3xl">{{error}}</p>
+
+{% endblock body %}

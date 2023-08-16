@@ -1,0 +1,190 @@
+{% extends 'base.html'%}
+{% block body %}
+
+
+{% if request.method == 'POST' %}
+    
+    {%if error == 1 %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">Email already in use !</p>
+
+    {% elif error == 2 %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">Passwords Do Not Match !</p>
+    
+    {% elif error == 3 %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">Enter more secure password !</p>
+    
+    {% elif error == 4 %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">Invalid Contact No. !</p>
+      {% endif %}  
+    
+{% endif %}
+    
+
+<div class="book_now-container flex ">
+    <div class="signup-form box_shadow text-white rounded-lg border border-blue-900 w-2/3 md:w-7/12 my-5 px-10 py-5 mx-auto">
+        <form action="{% url 'Booking:book_room' %}" method="post">
+            {% csrf_token %}
+            <h2 class="form_heading">BOOK NOW</h2>
+            <hr class="mb-10 mx-10">
+            <div class="name">
+                <label for="name" class="form_label">Name*:</label><br>
+                <input name="name" type="text" required placeholder="Enter name"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ name }}" {% endif %}>
+            </div>
+
+            <div class="email">
+                <label for="email" class="form_label">Email Address*:</label><br>
+                <input name="email" type="email" required placeholder="Enter your email address"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ email }}" {% endif %}>
+            </div>
+            <div class="number">
+                <label for="room-number" class="form_label">Room No.:</label><br>
+                <input name="room_number" type="number" placeholder="Room number"
+                    class="form_input"
+                    {% if room_number %} value="{{ room_number }}" {% endif %} readonly>
+            </div>
+            
+            <div class="type">
+                <label for="room_type" class="form_label">Room Type:</label><br>
+                <input name="room_type" type="text" placeholder="Room type"
+                    class="form_input"
+                    {% if room_type %} value="{{ room_type }}" {% endif %} readonly>
+            </div>
+            <div class="capacity">
+                <label for="room_capacity" class="form_label">Room Capcity:</label><br>
+                <input name="room_capacity" type="text" placeholder="Room Capacity"
+                    class="form_input"
+                    {% if room_capacity %} value="{{ capacity }}" {% endif %} readonly>
+            </div>
+            
+           <div class="check-in">
+            <label for="check-in-date" class="form_label">Check-In*:</label><br>
+            <input name="check_in" type="date" required placeholder="Enter  Check in date"
+                class="form_input"
+                {% if request.method == 'POST' %} value="{{ check_in }}" {% endif %}>
+           </div>
+           <div class="check-out">
+            <label for="check-out-date" class="form_label">Check-Out*:</label><br>
+            <input name="check_out" type="date" required placeholder="Enter  Check out date"
+                class="form_input"
+                {% if request.method == 'POST' %} value="{{ check_out }}" {% endif %}>
+                <p class="error-message" style="color: red; font-size: 12px; display: none;">Check-out date must be greater than check-in date</p>
+           </div>
+            
+            <div class="submit_btn my-3">
+                <button  id="book_btn" onclick="sendmail() ; reset(); return false" class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
+                bg-purple-700 hover:bg-purple-900">Book</button>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<script>
+
+    // script to check for checkout date greater  than check in date
+    var checkInInput = document.querySelector('[name="check_in"]');
+    var checkOutInput = document.querySelector('[name="check_out"]');
+    var errorMessage = document.querySelector('.error-message');
+    const today = new Date().toISOString().split('T')[0];
+checkInInput.min = today;
+    function showError() {
+        errorMessage.style.display = 'block';
+        checkOutInput.classList.add('error');
+    }
+
+    function hideError() {
+        errorMessage.style.display = 'none';
+        checkOutInput.classList.remove('error');
+    }
+
+    checkInInput.addEventListener('change', function() {
+        checkOutInput.min = checkInInput.value;
+        if (checkOutInput.value && checkOutInput.value < checkInInput.value) {
+            showError();
+        } else {
+            hideError();
+        }
+    });
+
+    checkOutInput.addEventListener('change', function() {
+        if (checkOutInput.value < checkInInput.value) {
+            showError();
+        } else {
+            hideError();
+        }
+    });
+
+// function to send email 
+
+function choose_profile() {
+    let book_for = document.getElementById("book_for_").value;
+
+    let single_room = document.getElementById("single_room");
+    let double_room = document.getElementById("double_room");
+    let triple_room = document.getElementById("triple_room");
+
+    let msg = document.querySelector(".message");
+
+
+
+    if (book_for == "human") {
+        msg.textContent = "Humans are welcome";
+        triple_room.disabled = true;
+
+
+    }
+    else if (book_for == "monster")
+        {
+            msg.textContent = "Monsters are welcome";
+            single_room.disabled = true;
+        }
+}
+
+//  profile choosing function ends 
+
+// booking confirmation email sending  js  (starts)
+
+
+function sendmail(){
+    
+    let user= document.getElementById("user_name").value;
+    let email= document.getElementById("user_email").value;
+    let arrival= document.getElementById("user_arrival").value;
+    let rooms= document.getElementById("no._rooms").value;
+    let people= document.getElementById("no._people").value;
+    let room_type= document.getElementById("room_type").value + " bed";
+    let msg = "Congratulations !!! Your room has been sucessfully booked.This is the confirmation message regarding your booking. Here is the details that you have entered<hr>"
+
+
+
+     let body = msg+'<br>Name: ' + user +"<br>Email: " +email+ "<br>Arrival Date: "+arrival +"<br>No. Of Rooms: " + rooms+"<br>No. Of People: " + people+"<br>Room Type: " + room_type  ;
+
+
+    Email.send({
+        SecureToken:"3e2ac407-b09f-46c8-a1f2-e79da3f7540c",
+        To : email,
+        From: "anupeshforcloud@gmail.com",
+        Subject: "Hotel Booking Status",
+        Body:body,
+    }).then(
+        message =>{
+            //console.log (message);
+            if(message=='OK'){
+            alert('Your room has been booked successfully, check your e-mail for confirmation.');
+            }
+            else{
+                console.error (message);
+                alert('There is error at sending e-mail. ')
+                
+            }
+        }
+    );
+}
+
+
+</script>
+
+{% endblock %}

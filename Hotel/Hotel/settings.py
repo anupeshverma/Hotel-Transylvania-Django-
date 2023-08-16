@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'Rooms',
 ]
 
+LOGIN_URL = 'Accounts:login'  # Replace with your actual login URL
+LOGIN_REDIRECT_URL = '/'
+
 
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
