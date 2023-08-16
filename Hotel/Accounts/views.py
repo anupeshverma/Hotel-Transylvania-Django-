@@ -4,6 +4,7 @@ import string
 from django.views import View
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, BadHeaderError
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.exceptions import ValidationError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str

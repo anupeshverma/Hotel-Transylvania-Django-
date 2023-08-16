@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div class="text-center text-blue-500 underline text-3xl font-semibold mt-10 mb-5 underline-offset-4">Active users</div>
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+    <div class="overflow-x-auto w-full" style="margin: 0 16px;">
+        <table class="table-auto border w-full mb-10 text-center text-white bg-gray-700">
+            <thead>
+                <tr class="bg-blue-700 text-white">
+                    <th class="px-4 py-2 border">Email</th>
+                    <th class="px-4 py-2 border">Full Name</th>
+                    <th class="px-4 py-2 border">Contact No.</th>
+                    <th class="px-4 py-2 border">Action</th>
+                </tr>
+            </thead>
+            <p class="text-2xl text-white font-bold">Admins :</p>
+            <tbody>
+                {% for admin in admins %}
+                <tr>
+                    <td class="px-4 py-2 border">{{ admin.email }}</td>
+                    <td class="px-4 py-2 border">{{ admin.first_name }} {{ admin.last_name }}</td>
+                    <td class="px-4 py-2 border">{{ admin.phone_number }}</td>
+                    <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
+                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                                Edit/Change
+                            </button>
+                        </form>
+                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+    <div class="overflow-x-auto w-full" style="margin: 0 16px;">
+        <table class="table-auto border w-full mb-10 text-center text-white bg-gray-700">
+            <thead>
+                <tr class="bg-blue-700 text-white">
+                    <th class="px-4 py-2 border">Email</th>
+                    <th class="px-4 py-2 border">Full Name</th>
+                    <th class="px-4 py-2 border">Contact No.</th>
+                    <th class="px-4 py-2 border">Action</th>
+                </tr>
+            </thead>
+            <p class="text-2xl text-white font-bold">Humans :</p>
+            <tbody>
+                {% for human in humans %}
+                <tr>
+                    <td class="px-4 py-2 border">{{ human.email }}</td>
+                    <td class="px-4 py-2 border">{{ human.first_name }} {{ human.last_name }}</td>
+                    <td class="px-4 py-2 border">{{ human.phone_number }}</td>
+                    <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
+                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                                Edit/Change
+                            </button>
+                        </form>
+                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+
+
+<!-- <hr> -->
+
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+    <div class="overflow-x-auto w-full" style="margin: 0 16px;">
+        <table class="table-auto border w-full mb-10 text-center text-white bg-gray-700">
+            <thead>
+                <tr class="bg-blue-700 text-white">
+                    <th class="px-4 py-2 border">Email</th>
+                    <th class="px-4 py-2 border">Full Name</th>
+                    <th class="px-4 py-2 border">Contact No.</th>
+                    <th class="px-4 py-2 border">Action</th>
+                </tr>
+            </thead>
+            <p class="text-2xl text-white font-bold">Monsters :</p>
+            <tbody>
+                {% for monster in monsters %}
+                <tr>
+                    <td class="px-4 py-2 border">{{ monster.email }}</td>
+                    <td class="px-4 py-2 border">{{ monster.first_name }} {{ monster.last_name }}</td>
+                    <td class="px-4 py-2 border">{{ monster.phone_number }}</td>
+                    <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
+                        <form method="post" action="{% url 'AdminPanel:edit_user' admin.pk %}">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                                Edit/Change
+                            </button>
+                        </form>
+                        <a href="{% url 'AdminPanel:delete_user' user.id %}" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+{% endblock body %}

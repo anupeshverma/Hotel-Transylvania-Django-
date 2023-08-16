@@ -9,12 +9,13 @@ from .views import *
 
 urlpatterns = [
       path("__reload__/", include("django_browser_reload.urls")),
-    path('admin/', admin.site.urls),
+    path('djangoadmin/', admin.site.urls),
     path('', home, name ='home'),
     # path('Accounts/', include('Accounts.urls', namespace='Accounts')),
     path('account/', include(('Accounts.urls', 'Accounts'), namespace='Accounts')),
     path('booking/', include(('Booking.urls', 'Booking'), namespace='Booking')),
     path('rooms/', include(('Rooms.urls', 'Rooms'), namespace='Rooms')),
+    path('admin/', include(('AdminPanel.urls', 'AdminPanel'), namespace='AdminPanel')),
 
  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

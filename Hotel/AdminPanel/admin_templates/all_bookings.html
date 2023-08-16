@@ -1,0 +1,35 @@
+{% extends 'admin_dashboard.html' %}
+{% load static %}
+
+{% block body %}
+<div class="text-center text-blue-500 underline text-3xl font-semibold mt-10 mb-5 underline-offset-4">All Bookings</div>
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+<div class="overflow-x-auto w-full " style="margin: 0 16px;">
+  <table class="table-auto border w-full relative mb-10 ">
+    <thead>
+      <tr class="bg-blue-500 text-white">
+        <th class="px-4 py-2 border">Booking ID</th>
+        <th class="px-4 py-2 border">Booking Date</th>
+        <th class="px-4 py-2 border">Guest Name</th>
+        <th class="px-4 py-2 border">CheckIn Date</th>
+        <th class="px-4 py-2 border">CheckOut Date</th>
+        <th class="px-4 py-2 border">Room No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr class="text-white text-center">
+        <td class="px-4 py-2 border">{{ booking.id }}</td>
+        <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.bookingDate }}</td>
+        <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.guestName }}</td>
+        <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.checkInDate }}</td>
+        <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.checkOutDate }}</td>
+        <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.roomNo }}</td>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+{% endblock body %}

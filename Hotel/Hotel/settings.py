@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Accounts',
     'Booking',
     'Rooms',
+    'AdminPanel',
 ]
 
 LOGIN_URL = 'Accounts:login'  # Replace with your actual login URL
@@ -82,6 +83,7 @@ TEMPLATES = [
              os.path.join(BASE_DIR, 'Accounts', 'ac_templates'),
              os.path.join(BASE_DIR, 'Booking', 'Booking_templates'),
              os.path.join(BASE_DIR, 'Rooms', 'Rooms_templates'),
+             os.path.join(BASE_DIR, 'AdminPanel', 'Admin_templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

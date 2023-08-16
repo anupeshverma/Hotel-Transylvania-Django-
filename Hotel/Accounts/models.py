@@ -2,13 +2,8 @@ from django.db import models
 import os 
 
 def user_profile_pic_path(instance, filename):
-    # Get the user's ID
     user_id = instance.id
-
-    # Generate the new filename using the user's ID
     new_filename = f'user_{user_id}{os.path.splitext(filename)[1]}'
-
-    # Return the full path for the file
     return os.path.join('profile_pics', new_filename)
 
 # Create your models here.

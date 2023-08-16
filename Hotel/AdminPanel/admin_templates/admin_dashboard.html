@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% block body %} {%load static%}
+
+<!-- inspiration from UI Design Daily -->
+<div class="flex flex-col md:flex-row my-6">
+  <div class="bg-gray-500 shadow-lg rounded-xl md:w-[300px] relative">
+    <header
+      class="bg-gradient-to-r from-indigo-500 to-indigo-600 transform flex items-center mb-2 py-6 px-6 rounded-xl"
+    >
+      <!-- <img
+        class="rounded-full w-20 h-20 ring-4 ring-opacity-20 ring-gray-200"
+        src="https://randomuser.me/api/portraits/men/79.jpg"
+        alt="Admin logo"
+      /> -->
+      <div class="ml-5">
+        <h1 class="text-white tracking-wide text-lg">
+          {{ acc.first_name }} {{ acc.last_name }}
+        </h1>
+        <p class="text-gray-300 tracking-wider text-sm">Admin</p>
+      </div>
+    </header>
+
+    <div class="">
+      <button
+        class="text-white capitalize text-sm bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-md flex items-center py-2 pl-3 pr-4 shadow-md mx-auto tracking-wider mb-2"
+      >
+        <svg
+          class="w-6 h-6 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          ></path>
+        </svg>
+        Dummy Button
+      </button>
+
+      <ul class="px-8 relative pb-2">
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'AdminPanel:dashboard' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-user-plus"></i></div>
+              <div>Dashboard</div>
+            </div></a
+          >
+        </li>
+
+    
+
+<li class="flex items-center text-gray-900 text-md py-4">
+    <a href="{% url 'AdminPanel:add_user' %}"
+    ><div class="flex flex-row space-x-4">
+        <div><i class="fa-solid fa-user-plus"></i></div>
+        <div>Add Users</div>
+    </div></a
+    >
+</li>
+
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="#"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-envelope"></i></div>
+              <div>Send mail to added Users</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'Accounts:login' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-bell"></i></div>
+              <div>Add a Room</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'AdminPanel:all_users' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-book"></i></div>
+              <div>All Users</div>
+            </div></a
+          >
+        </li>
+        
+        
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'AdminPanel:all_bookings'%}"
+          ><div class="flex flex-row space-x-4">
+            <div><i class="fa-regular fa-calendar-plus"></i></div>
+            <div>All Bookings</div>
+          </div></a
+          >
+        </li>
+        
+        {% comment %}
+        
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'admin_portal:all_users' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-users"></i></div>
+              <div>Approved Users List</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'admin_portal:unapproved_users' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-graduation-cap"></i></div>
+              <div>Unapproved Users List</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_events'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Events</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_notices'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Notices</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_projects'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Projects</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_opps'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Opportunities</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_notices'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Blogs</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{%url 'admin_portal:all_sms'%}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-regular fa-calendar-plus"></i></div>
+              <div>All Study Materials</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="#"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-image"></i></div>
+              <div>Add to Gallery</div>
+            </div></a
+          >
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="#"
+            ><div class="flex flex-row space-x-4 mb-10">
+              <div><i class="fa-solid fa-calendar-plus"></i></div>
+              <div>Add Academic Events</div>
+            </div></a
+          >
+        </li>
+        {% endcomment %}
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <div>Account</div>
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'Accounts:logout' %}"
+            ><div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-right-from-bracket"></i></div>
+              <div>Logout</div>
+            </div></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="my-20 w-full max-h max-w-3xl mx-auto">
+    {% block form %}
+
+    {% endblock form %}
+  </div>
+</div>
+{% endblock body %}

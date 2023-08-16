@@ -17,6 +17,13 @@
 
         {% endif %}
     </div>
+    
+    {% if acc.role == "admin" or acc.role == "Admin" %}
+    <button class="m-5 p-1 font-bold text-white bg-blue-700 hover:bg-blue-600 rounded-md"><a
+        href="{% url 'AdminPanel:dashboard' %}">Admin Dashboard</a></button>
+        
+    {% endif %}
+        
 
     <p class="edit_photo text-white text-center hover:underline cursor-pointer">Edit Photo</p>
     <!--enctype="multipart/form-data" is used when we upload files/images so that browser send it in binary form -->
@@ -55,28 +62,32 @@
     {% else %}
     <!-- TABLE OF BOOKING DETAILS-->
     <div class="text-center">
-        <table id='bookingTable' class="text-center min-w-full">
+        <table class="table-auto border w-full relative mb-10 ">
             <thead>
-                <tr>
-                    <th scope="col" class="px-6 py-4">Booking ID</th>
-                    <th scope="col" class="px-6 py-4">Booking Date</th>
-                    <th scope="col" class="px-6 py-4">Guest Name</th>
-                    <th scope="col" class="px-6 py-4">Room No.</th>
-                </tr>
+              <tr class="text-white">
+                <th class="px-4 py-2 border">Booking ID</th>
+                <th class="px-4 py-2 border">Booking Date</th>
+                <th class="px-4 py-2 border">Guest Name</th>
+                <th class="px-4 py-2 border">CheckIn Date</th>
+                <th class="px-4 py-2 border">CheckOut Date</th>
+                <th class="px-4 py-2 border">Room No.</th>
+              </tr>
             </thead>
             <tbody>
-                <hr class="bg-white h-1">
-                {% for booking in bookings %}
-                <tr>
-                    <td class="px-6 py-4">{{ booking.id }}</td>
-                    <td class="px-6 py-4">{{ booking.bookingDate }}</td>
-                    <td class="px-6 py-4">{{ booking.guestName }}</td>
-                    <td class="px-6 py-4">{{ booking.roomNo }}</td>
-
-                </tr>
-                {% endfor %}
+              {% for booking in bookings %}
+              <tr class="text-white text-center">
+                <td class="px-4 py-2 border">{{ booking.id }}</td>
+                <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.bookingDate }}</td>
+                <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.guestName }}</td>
+                <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.checkInDate }}</td>
+                <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.checkOutDate }}</td>
+                <td class="px-4 py-2 border" style="line-clamp: 2;">{{ booking.roomNo }}</td>
+                </td>
+              </tr>
+              {% endfor %}
             </tbody>
-        </table>
+          </table>
+        
     </div>
     {% endif %}
 </div>
