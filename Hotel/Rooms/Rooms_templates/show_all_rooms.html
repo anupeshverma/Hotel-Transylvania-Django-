@@ -5,6 +5,16 @@
 <section class="m-3 p-3">
   <h1 class="m-3 text-center text-4xl font-bold bg-blue-500">Rooms</h1>
 
+  <div class="">
+    <a href="{% url 'Rooms:add_room' %}"><div class="flex flex-row my-[30px] mx-[50px] text-xl font-semibold sm:justify-center hover:underline">
+      <div class="w-6 h-6 ">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-1 h-1">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg></div>
+        <div class="">Add Rooms</div>
+      </div></a>
+  </div>
+
   <!-- Filter form -->
   <form method="get" action="">
     <label>Room Capacity:</label><br>
@@ -31,7 +41,7 @@
     >
       <img
         alt="Home"
-        src="{% if room.roomImage %}{{ roomImage.url }}{% endif %}"
+        src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"
         class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
       />
 
