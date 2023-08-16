@@ -13,7 +13,11 @@ urlpatterns = [
     path('', home, name ='home'),
     # path('Accounts/', include('Accounts.urls', namespace='Accounts')),
     path('account/', include(('Accounts.urls', 'Accounts'), namespace='Accounts')),
+<<<<<<< HEAD
     path('booking/', include(('booking.urls', 'booking'), namespace='booking')),
     #  path('booking/showRooms/', views.showRooms, name='showRooms'),
+=======
+    path('booking/', include(('Booking.urls', 'Booking'), namespace='Booking')),
+>>>>>>> a56cc987c97102de83310454f5252a4e30e46011
  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -47,9 +47,21 @@
                     {% if request.method == 'POST' %} value="{{ email }}" {% endif %}>
             </div>
 
-          
-            <div class="room_no">
-              
+            <div class="number">
+                <label for="contact-no" class="form_label">Contact No.:</label><br>
+                <input name="contact" type="text" placeholder="Enter your contact number"
+                    class="form_input"
+                    {% if request.method == 'POST' %} value="{{ contact }}" {% endif %}>
+            </div>
+            <div class="role">
+                <label for="role" class="form_label">Register As*:</label><br>
+                <select id="role" name="role" required
+                    class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
+                    <option value="" hidden>Select role</option>
+                    <option value="Human" {% if role == "Human" %} selected {% endif %} class="bg-black">Human</option>
+                    <option value="Monster" {% if role == "Monster" %} selected {% endif %} class="bg-black     
+                     ">Monster</option>
+                </select>
             </div>
             <div class="password">
                 <label for="password" class="form_label">Password:</label><br>
