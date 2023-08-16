@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'Accounts',
     'Booking',
+    'Rooms',
 ]
 
 
@@ -77,6 +78,7 @@ TEMPLATES = [
              os.path.join(BASE_DIR, 'Hotel', 'Base_templates'),
              os.path.join(BASE_DIR, 'Accounts', 'ac_templates'),
              os.path.join(BASE_DIR, 'Booking', 'Booking_templates'),
+             os.path.join(BASE_DIR, 'Rooms', 'Rooms_templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
