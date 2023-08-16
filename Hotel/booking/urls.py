@@ -1,10 +1,9 @@
-from django.urls import path,re_path
+from .views import *
 from . import views
+from django.urls import path
 
-app_name = 'booking'
+app_name = 'Booking'
 
 urlpatterns = [
-    # Add your other URL patterns here...
-    path('booking/<str:room_type>/<int:room_number>/', views.booking, name='booking_form'),
-    # ...
+    path('book_room/', bookRoom, name='login'),
 ]

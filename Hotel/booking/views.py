@@ -1,8 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseServerError
 
-
-def booking(request, room_type, room_number):
-    return render(request, 'booking_form.html', {
-        'room_type': room_type,
-        'room_number': room_number
-    })
+# Create your views here.
+def bookRoom(request):
+    return HttpResponse("BOkk room")

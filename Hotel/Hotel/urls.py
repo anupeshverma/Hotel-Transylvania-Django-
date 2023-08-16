@@ -13,6 +13,6 @@ urlpatterns = [
     path('', home, name ='home'),
     # path('Accounts/', include('Accounts.urls', namespace='Accounts')),
     path('account/', include(('Accounts.urls', 'Accounts'), namespace='Accounts')),
-    path('booking/', include(('booking.urls', 'booking'), namespace='booking')),
+    path('booking/', include(('Booking.urls', 'Booking'), namespace='Booking')),
  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
