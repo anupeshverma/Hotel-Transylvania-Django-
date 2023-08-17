@@ -255,7 +255,7 @@ class profile(LoginRequiredMixin, View):
         user_account = user_account[0]
         bookings = Booking.objects.filter(user=user_account).order_by('-bookingDate')
 
-        paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
+        paginator = Paginator(bookings, 5)  # Show 5 bookings  per page
         page = request.GET.get('page', 1)
         try:
             bookings = paginator.get_page(page)
