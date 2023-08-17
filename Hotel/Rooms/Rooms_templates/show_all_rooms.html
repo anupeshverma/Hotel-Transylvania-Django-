@@ -51,17 +51,10 @@
       Apply Filters
     </button>
   </form>
-
   <!-- Filter form ends -->
 
-  <!-- if filter appplies then show available rooms else all rooms -->
-  {% if filter_applied %}
-
   <div class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4">
-    <!-- rooms div goes here  -->
-
-    {% for room in available_rooms %}
-
+    {% for room in rooms %}
     <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
       <img alt="Home" src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"
         class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110" />
@@ -90,58 +83,14 @@
         </div>
         <div class="book mt-1 flex justify-center">
           <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-            href="{% url 'Booking:book_room_form' room.capacity room.roomNo room.roomType %}?room_type={{ room.roomType|urlencode }}&room_number={{ room.number }}&capacity={{room.capacity}}">
+            href="{% url 'Booking:book_room_form' room.capacity room.roomNo room.roomType room.price %}?room_type={{ room.roomType|urlencode }}&room_number={{ room.number }}&capacity={{room.capacity}}&price={{room.price}}">
             Book Now
           </a>
         </div>
       </div>
     </div>
-    {% endfor %}
-
-    {% else %}
-
-    <div class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4">
-      <!-- rooms div goes here  -->
-
-      {% for room in rooms %}
-
-      <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
-        <img alt="Home" src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"
-          class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110" />
-
-        <div class="mt-2"></div>
-
-        <div class="flex justify-between md:flex-col">
-          <div class="flex capacity flex-col md:flex-row mt-1">
-            <div class="text-sm font-medium text-white">Capacity : &nbsp;</div>
-            <div class="text-sm font-medium text-white">{{room.capacity}}</div>
-          </div>
-          <div class="rating flex flex-col md:flex-row mt-1">
-            <div class="text-sm font-medium text-white">Type :&nbsp;</div>
-            <div class="text-sm font-medium text-white">{{room.roomType}}</div>
-          </div>
-          <div class="price flex flex-col md:flex-row mt-1">
-            <div class="text-sm font-medium text-white">Price :&nbsp;</div>
-            <div class="text-sm font-medium text-white">Rs. {{room.price}}</div>
-          </div>
-          <!-- description -->
-          <div class="description mt-2 relative">
-            <div class="description-text line-clamp-2">
-              <span class="text-m font-medium text-white">Description :</span>
-              <span class="text-sm text-gray-500"> {{ room.description}} </span>
-            </div>
-          </div>
-          <div class="book mt-1 flex justify-center">
-            <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-              href="{% url 'Booking:book_room_form' room.capacity room.roomNo room.roomType %}?room_type={{ room.roomType|urlencode }}&room_number={{ room.number }}&capacity={{room.capacity}}">
-              Book Now
-            </a>
-          </div>
-        </div>
-      </div>
-      {%endfor%}
-    </div>
-    {% endif %}
+    {%endfor%}
+  </div>
 </section>
 
 {% endblock body %}

@@ -20,7 +20,7 @@ from .models import *
 from Booking.models import Booking
 import random
 import os
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 
 
 def checkrender(request):
@@ -262,7 +262,7 @@ class profile(LoginRequiredMixin, View):
         except PageNotAnInteger:
             bookings = paginator.get_page(1)
         except EmptyPage:
-            bookings = paginator.get_page(paginator.num_pages)
+                bookings = paginator.get_page(paginator.num_pages)
 
 
         return render(request, "profile_page.html", {"acc": user_account, "bookings": bookings})

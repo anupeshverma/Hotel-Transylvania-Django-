@@ -38,12 +38,8 @@ def showFilteredRooms(request):
         available_rooms = Room.objects.filter(capacity=room_capacity).exclude(
             roomNo__in=booked_rooms
         )
-
-        print(available_rooms)
-
         context = {
-            "available_rooms": available_rooms,
-            "filter_applied": True,  # Set this flag to indicate filter applied
+            "rooms": available_rooms,
         }
 
         return render(request, "show_all_rooms.html", context)

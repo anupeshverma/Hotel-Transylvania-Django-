@@ -35,4 +35,33 @@
     </table>
   </div>
 </div>
+
+<!-- paginator logic  -->
+<div class="paginator flex flex-row justify-center">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="pagination-container my-6 text-semibold justify-center">
+        {% if bookings.has_previous %}
+        <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+          href="?page=1">&laquo;</a>
+        <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+          href="?page={{ bookings.previous_page_number }}">{{ bookings.previous_page_number }}</a>
+        {% endif %}
+
+        <a class="p-2 px-3 mr-1 rounded-full text-white disabled"
+          style="background-color: #2f2056; pointer-events: none;">
+          {{ bookings.number }}
+        </a>
+
+        {% if bookings.has_next %}
+        <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+          href="?page={{ bookings.next_page_number }}">{{ bookings.next_page_number }}</a>
+        <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+          href="?page={{ bookings.paginator.num_pages }}">&raquo;</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock body %}
