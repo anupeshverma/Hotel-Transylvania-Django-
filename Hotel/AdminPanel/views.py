@@ -36,7 +36,7 @@ class currentBookings_(LoginRequiredMixin, View):
             )
         bookings = currentBookings.objects.filter().order_by("-bookingDate")
 
-        paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
+        paginator = Paginator(bookings, 10)  # Show 10 bookings  per page
         page = request.GET.get("page", 1)
         try:
             bookings = paginator.get_page(page)
@@ -219,6 +219,10 @@ class addRoom(LoginRequiredMixin, View):
         # Checking if room no.already exist
         if Room.objects.filter(roomNo=roomNo).exists():
             return render(request, "add_room.html", {"error": "Room No. already exist"})
+        if roomType=="General" and capacity=="Triple":
+            return render(request, "add_room.html", {"error": "General rooms have Single & Double beds only"})
+        if roomType=="Special" and capacity=="Single":
+            return render(request, "add_room.html", {"error": "Special rooms have Double & Triple beds only"})
         room.save()
 
         return redirect("Rooms:show_all_rooms")
@@ -232,7 +236,7 @@ class allBookings(LoginRequiredMixin, View):
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
         bookings = Booking.objects.filter().order_by("checkInDate")
-        paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
+        paginator = Paginator(bookings, 10)  # Show 10 bookings  per page
         page = request.GET.get("page", 1)
         try:
             bookings = paginator.get_page(page)

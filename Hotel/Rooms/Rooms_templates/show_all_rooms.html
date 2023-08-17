@@ -15,34 +15,21 @@
       </a>
     </div>
 
-    {% if acc.role == "admin" or acc.role == "Admin" %}
-    <div class="text-white text-center mx-2 my-auto">
-      <a href="{% url 'AdminPanel:add_room' %}">
-        <div
-          class="flex flex-row my-[30px] mx-[50px] text-xl font-semibold items-center justify-center hover:underline"
-        >
-          <div class="w-6 h-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="{1.5}"
-              stroke="currentColor"
-              className="w-1 h-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-          <div class="mx-2">Add Rooms</div>
+  {% if acc.role == "admin" or acc.role == "Admin" %}
+  <div class="text-white text-center">
+    <a href="{% url 'Rooms:add_room' %}">
+      <div class="flex flex-row my-[30px] mx-[50px] text-xl font-semibold items-center justify-center hover:underline">
+        <div class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}"
+            stroke="currentColor" className="w-1 h-1">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
         </div>
-      </a>
-    </div>
-    {% endif %}
+        <div class="mx-2">Add Rooms</div>
+      </div>
+    </a>
   </div>
+  {% endif %}
 
   <!-- Filter form -->
   <form
