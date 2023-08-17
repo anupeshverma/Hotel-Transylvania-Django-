@@ -1,0 +1,73 @@
+{% extends 'admin_dashboard.html' %}
+
+{% block form %}
+
+{% if request.method == 'POST' %}
+    {%if error  %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">{{error}}</p>
+      {% endif %}  
+{% endif %}
+
+<div class="mt-3 flex flex-col items-center">
+    <div class="photo mx-auto">
+        <img src="{{room.roomImage.url}}" alt="Room Image" id="room_image" class=" border-4 object-fill h-64">
+    </div>
+    <!--enctype="multipart/form-data" is used when we upload files/images so that browser send it in binary form -->
+    <div class="text_shadow m-2 name text-center text-4xl text-purple-700 font-bold">Room No.{{room.roomNo}}
+    </div>
+    <br>
+    <form action="{% url 'AdminPanel:edit_room' room.roomNo %}" enctype="multipart/form-data" method="post"
+        class="input_photo text-white">
+        {% csrf_token %}
+        <input name="roomImage" type="file" accept=".jpg, .jpeg, .png, .">
+        <br>
+        <p class="text-red-600 text-xs">*Image should be in .jpg, .jpeg or .png format.</p>
+        <br>
+        <div class="roomNo">
+            <label for="roomNo" class="form_label">Room No*:</label><br>
+            <input name="roomNo" type="number" required placeholder="Enter room No" class="form_input"
+                value="{{ room.roomNo }}">
+        </div>
+        <div class="roomType">
+            <label for="roomType" class="form_label">Select Room Type:*</label><br>
+            <select id="roomType" name="roomType" required
+                class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
+                <option value="" hidden>Select Room Type</option>
+                <option value="General" class="bg-black" {% if room.roomType == "General" %} selected {% endif %}>General
+                </option>
+                <option value="Special" class="bg-black" {% if room.roomType == "Special" %} selected {% endif %}>Special
+                </option>
+            </select>
+        </div>
+        <div class="roomCapacity">
+            <label for="roomCapacity" class="form_label">Room Capacity *:</label><br>
+            <select id="roomCapacity" name="roomCapacity" required
+                class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
+                <option value="" hidden>Select Room Capacity</option>
+                <option value="Single" {% if room.capacity == "Single" %} selected {% endif %} class="bg-black">Single </option>
+
+                <option value="Double" {% if room.capacity == "Double" %} selected {% endif %} class="bg-black">Double </option>
+
+                <option value="Triple" {% if room.capacity == "Triple" %} selected {% endif %} class="bg-black">Triple </option>
+
+            </select>
+        </div>
+        <div class="price ">
+            <label for="price " class="form_label">Enter Room Price *:</label><br>
+            <input name="price" type="number" required placeholder="Enter room Price " class="form_input"
+                value="{{ room.price}}">
+        </div>
+        <div class="description">
+            <label for="description" class="form_label">Room Description:*</label><br>
+            <textarea name="description" id="description" cols="30" rows="5" required
+                class="form_input">{{ room.description }}</textarea>
+        </div>
+        <button
+            class="mx-5 p-2 font-bold text-white bg-blue-600 hover:bg-blue-500 rounded-md"><a>Update</a></button>
+        <button class="mx-5 p-2 font-bold text-white bg-red-600 hover:bg-red-500 rounded-md"><a
+                href="{% url 'AdminPanel:delete_room' room.roomNo%}">Delete Room</a></button>
+    </form>
+</div>
+
+
+{% endblock %}

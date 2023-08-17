@@ -15,14 +15,14 @@
             <h2 class="form_heading">Add Room </h2>
             <hr class="mb-10 mx-10">
             <div class="roomNo">
-                <label for="roomNo" class="form_label">Room No*:</label><br>
+                <label for="roomNo" class="form_label">Room No:*</label><br>
                 <input name="roomNo" type="number" required placeholder="Enter room No"
                     class="form_input"
                     {% if request.method == 'POST' %} value="{{ roomNo }}" {% endif %}>
             </div>
 
             <div class="roomType">
-                <label for="roomType" class="form_label">Select Room Type *:</label><br>
+                <label for="roomType" class="form_label">Select Room Type:*</label><br>
                 <select id="roomType" name="roomType" required
                     class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
                     <option value="" hidden>Select Room Type</option>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="roomCapacity">
-                <label for="roomCapacity" class="form_label">Room Cpacity *:</label><br>
+                <label for="roomCapacity" class="form_label">Room Capacity *:</label><br>
                 <select id="roomCapacity" name="roomCapacity" required
                     class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
                     <option value="" hidden>Select Room Cpacity</option>

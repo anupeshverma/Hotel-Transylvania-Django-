@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div class="text-center text-blue-500 underline text-3xl font-semibold mt-5 underline-offset-4">All Rooms</div>
+<button class="m-5 p-1 font-bold text-white bg-blue-700 hover:bg-blue-600 rounded-md"><a
+        href="{% url 'AdminPanel:dashboard' %}">Admin Dashboard</a></button>
+
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+    <div class="overflow-x-auto w-full" style="margin: 0 16px;">
+        <table class="table-auto border w-full mb-10 text-center text-white bg-gray-700">
+            <thead>
+                <tr class="bg-blue-700 text-white">
+                    <th class="px-4 py-2 border">Room No.</th>
+                    <th class="px-4 py-2 border">Capacity</th>
+                    <th class="px-4 py-2 border">Price</th>
+                    <th class="px-4 py-2 border">Description</th>
+                    <th class="px-4 py-2 border">Action</th>
+                </tr>
+            </thead>
+            <p class="text-2xl text-white font-bold">General Rooms:</p>
+            <tbody>
+                {% for room in general %}
+                <tr>
+                    <td class="px-4 py-2 border">{{ room.roomNo }}</td>
+                    <td class="px-4 py-2 border">{{ room.capacity}}</td>
+                    <td class="px-4 py-2 border">{{ room.price }}</td>
+                    <td class="px-4 py-2 border">{{ room.description }}</td>
+                    <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
+
+                        <a href="{% url 'AdminPanel:edit_room' room.pk %}" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Edit/Change
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="paginator flex flex-row justify-center">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pagination-container my-6 text-semibold justify-center">
+          {% if general.has_previous %}
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page=1">&laquo;</a>
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ general.previous_page_number }}">{{ general.previous_page_number }}</a>
+          {% endif %}
+  
+          <a class="p-2 px-3 mr-1 rounded-full text-white disabled"
+            style="background-color: #2f2056; pointer-events: none;">
+            {{ general.number }}
+          </a>
+  
+          {% if general.has_next %}
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ general.next_page_number }}">{{ general.next_page_number }}</a>
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page={{ general.paginator.num_pages }}">&raquo;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+<hr>
+
+<div style="margin: 0 16px; display: flex; justify-content: center;">
+    <div class="overflow-x-auto w-full" style="margin: 0 16px;">
+        <table class="table-auto border w-full mb-10 text-center text-white bg-gray-700">
+            <thead>
+                <tr class="bg-blue-700 text-white">
+                    <th class="px-4 py-2 border">Room No.</th>
+                    <th class="px-4 py-2 border">Capacity</th>
+                    <th class="px-4 py-2 border">Price</th>
+                    <th class="px-4 py-2 border">Description</th>
+                    <th class="px-4 py-2 border">Action</th>
+                </tr>
+            </thead>
+            <p class="text-2xl text-white font-bold">Special Rooms:</p>
+            <tbody>
+                {% for room in special %}
+                <tr>
+                    <td class="px-4 py-2 border">{{ room.roomNo }}</td>
+                    <td class="px-4 py-2 border">{{ room.capacity}}</td>
+                    <td class="px-4 py-2 border">{{ room.price }}</td>
+                    <td class="px-4 py-2 border">{{ room.description }}</td>
+                    <td class="px-4 py-2 border" style="display: flex; justify-content: center;">
+
+                        <a href="{% url 'AdminPanel:edit_room' room.pk %}" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-2 rounded-full">
+                            Edit/Change
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="paginator flex flex-row justify-center">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pagination-container my-6 text-semibold justify-center">
+          {% if special.has_previous %}
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page=1">&laquo;</a>
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ special.previous_page_number }}">{{ special.previous_page_number }}</a>
+          {% endif %}
+  
+          <a class="p-2 px-3 mr-1 rounded-full text-white disabled"
+            style="background-color: #2f2056; pointer-events: none;">
+            {{ special.number }}
+          </a>
+  
+          {% if special.has_next %}
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ special.next_page_number }}">{{ special.next_page_number }}</a>
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page={{ special.paginator.num_pages }}">&raquo;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+
+<hr>
+{% endblock body %}

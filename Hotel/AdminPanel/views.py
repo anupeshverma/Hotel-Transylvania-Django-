@@ -11,6 +11,7 @@ from Accounts.models import userAccount
 from django.db.models import Q
 from Booking.models import Booking, currentBookings
 from Rooms.models import Room
+import os
 
 
 # Create your views here.
@@ -18,6 +19,19 @@ def getUserAccount(request):
     accn = userAccount.objects.filter(email=request.user.username)
     accn = accn[0]
     return accn
+
+
+def paginator_func(request, queryset, num):
+    paginator = Paginator(queryset, int(num))
+    page = request.GET.get("page", 1)
+    try:
+        paginated_data = paginator.get_page(int(page))
+    except PageNotAnInteger:
+        paginated_data = paginator.get_page(1)
+    except EmptyPage:
+        paginated_data = paginator.get_page(paginator.num_pages)
+
+    return paginated_data
 
 
 def dashboard(request):
@@ -35,15 +49,7 @@ class currentBookings_(LoginRequiredMixin, View):
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
         bookings = currentBookings.objects.filter().order_by("-bookingDate")
-
-        paginator = Paginator(bookings, 10)  # Show 10 bookings  per page
-        page = request.GET.get("page", 1)
-        try:
-            bookings = paginator.get_page(page)
-        except PageNotAnInteger:
-            bookings = paginator.get_page(1)
-        except EmptyPage:
-            bookings = paginator.get_page(paginator.num_pages)
+        bookings = paginator_func(request, bookings, 10)
 
         data = {"bookings": bookings}
         return render(request, "current_bookings.html", data)
@@ -58,9 +64,12 @@ class allUsers(LoginRequiredMixin, View):
             )
         accounts = userAccount.objects.filter().order_by("-first_name")
         admins = userAccount.objects.filter(Q(role="Admin") | Q(role="admin"))
-        print(admins)
         humans = userAccount.objects.filter(Q(role="Human") | Q(role="human"))
         monsters = userAccount.objects.filter(Q(role="Monster") | Q(role="monster"))
+
+        admins = paginator_func(request, admins, 5)
+        # humans= paginator_func(request, humans ,10)
+        # monsters = paginator_func(request,monsters,10)
         data = {
             "accounts": accounts,
             "admins": admins,
@@ -178,8 +187,15 @@ class allRooms(LoginRequiredMixin, View):
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
-        rooms = Room.objects.all
-        return render(request, "all_rooms.html")
+        rooms = Room.objects.all()
+        general = rooms.filter(roomType="General")
+        special = rooms.filter(roomType="Special")
+
+        general = paginator_func(request, general, 10)
+        special = paginator_func(request, special, 10)
+
+        data = {"general": general, "special": special}
+        return render(request, "all_rooms.html", data)
 
 
 class addRoom(LoginRequiredMixin, View):
@@ -219,13 +235,86 @@ class addRoom(LoginRequiredMixin, View):
         # Checking if room no.already exist
         if Room.objects.filter(roomNo=roomNo).exists():
             return render(request, "add_room.html", {"error": "Room No. already exist"})
-        if roomType=="General" and capacity=="Triple":
-            return render(request, "add_room.html", {"error": "General rooms have Single & Double beds only"})
-        if roomType=="Special" and capacity=="Single":
-            return render(request, "add_room.html", {"error": "Special rooms have Double & Triple beds only"})
+        if roomType == "General" and capacity == "Triple":
+            return render(
+                request,
+                "add_room.html",
+                {"error": "General rooms have Single & Double beds only"},
+            )
+        if roomType == "Special" and capacity == "Single":
+            return render(
+                request,
+                "add_room.html",
+                {"error": "Special rooms have Double & Triple beds only"},
+            )
         room.save()
 
         return redirect("Rooms:show_all_rooms")
+
+
+class editRoom(LoginRequiredMixin, View):
+    def get(self, request, roomNo):
+        user_account = getUserAccount(request)
+        if user_account.role != "Admin" and user_account.role != "admin":
+            return render(
+                request, "error_page.html", {"error": "Unauthorised Access !!"}
+            )
+        room = Room.objects.filter(roomNo=roomNo)
+        room = room[0]
+        return render(request, "edit_room.html", {"room": room})
+
+    def post(self, request, roomNo):
+        room = Room.objects.filter(roomNo=roomNo)
+        room = room[0]
+        roomNo = request.POST["roomNo"]
+        roomType = request.POST["roomType"]
+        capacity = request.POST["roomCapacity"]
+        price = request.POST["price"]
+        roomImage = request.FILES.get("roomImage")
+        description = request.POST["description"]
+
+        data = {
+            "room": room,
+            "error": "",
+        }
+
+        # Checking if room no.already exist
+        if roomType == "General" and capacity == "Triple":
+            data["error"] = "General rooms have Single & Double beds only"
+            return render(request, "edit_room.html", data)
+        if roomType == "Special" and capacity == "Single":
+            data["error"] = "Special rooms have Double & Triple beds only"
+            return render(request, "edit_room.html", data)
+
+        # Delete previous room image if available
+        if roomImage:
+            print(roomImage)
+            if room.roomImage:
+                previous_path = room.roomImage.path
+                if os.path.exists(previous_path):
+                    os.remove(previous_path)
+            room.roomImage = roomImage
+        room.roomNo = roomNo
+        room.roomType = roomType
+        room.capacity = capacity
+        room.price = price
+        room.description = description
+        room.save()
+
+        return redirect("AdminPanel:all_rooms")
+
+
+class deleteRoom(LoginRequiredMixin, View):
+    def get(self, request, roomNo):
+        user_account = getUserAccount(request)
+        if user_account.role != "Admin" and user_account.role != "admin":
+            return render(
+                request, "error_page.html", {"error": "Unauthorised Access !!"}
+            )
+        room = Room.objects.filter(roomNo=roomNo)
+        room = room[0]
+        room.delete()
+        return redirect("AdminPanel:all_rooms")
 
 
 class allBookings(LoginRequiredMixin, View):
@@ -236,12 +325,5 @@ class allBookings(LoginRequiredMixin, View):
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
         bookings = Booking.objects.filter().order_by("checkInDate")
-        paginator = Paginator(bookings, 10)  # Show 10 bookings  per page
-        page = request.GET.get("page", 1)
-        try:
-            bookings = paginator.get_page(page)
-        except PageNotAnInteger:
-            bookings = paginator.get_page(1)
-        except EmptyPage:
-            bookings = paginator.get_page(paginator.num_pages)
+        bookings = paginator_func(request, bookings, 10)
         return render(request, "all_bookings.html", {"bookings": bookings})

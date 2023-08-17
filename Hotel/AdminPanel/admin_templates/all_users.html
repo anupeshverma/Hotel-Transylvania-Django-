@@ -42,6 +42,34 @@
         </table>
     </div>
 </div>
+
+<div class="paginator flex flex-row justify-center">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pagination-container my-6 text-semibold justify-center">
+          {% if admins.has_previous %}
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page=1">&laquo;</a>
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ admins.previous_page_number }}">{{ admins.previous_page_number }}</a>
+          {% endif %}
+  
+          <a class="p-2 px-3 mr-1 rounded-full text-white disabled"
+            style="background-color: #2f2056; pointer-events: none;">
+            {{ admins.number }}
+          </a>
+  
+          {% if admins.has_next %}
+          <a class="p-2 px-3 rounded-full text-white" style="background-color: #543b9a; cursor: pointer;"
+            href="?page={{ admins.next_page_number }}">{{ admins.next_page_number }}</a>
+          <a class="p-2 px-4 rounded-full text-white" style="background-color: #7654d1; cursor: pointer;"
+            href="?page={{ admins.paginator.num_pages }}">&raquo;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
 <hr>
 
 <div style="margin: 0 16px; display: flex; justify-content: center;">
