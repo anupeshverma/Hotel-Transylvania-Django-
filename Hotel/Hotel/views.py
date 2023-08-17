@@ -8,3 +8,13 @@ def home(request):
     data = {"roomData": roomData}
 
     return render(request, "index.html", {"roomData": roomData})
+
+
+def about(request):
+    
+    return render(request, "about.html")
+
+
+def contact(request):
+    
+    return render(request, "contact.html")

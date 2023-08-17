@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block body %}
+
+<div class="mt-2 text-5xl italic text-center underline text-white font-mono ">
+  About Us
+</div>
+
+<section>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-8">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-bold sm:text-4xl text-purple-500 font-serif ">
+        Welcome to Hotel Transylvania: Where Monsters Find Sanctuary
+      </h2>
+    </div>
+
+    <div
+      class="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 border border-teal-500 p-4"
+    >
+      <div class="relative h-64 overflow-hidden sm:h-80 lg:h-full my-auto">
+        <img
+          alt="Party"
+          src="https://images.ctfassets.net/nwbqij9m1jag/4cHeXGvCxqKmky6Ai8s4sG/ff350e5ba0c2b0a07dc03cbff4ba294e/haunted-hotel-at-night-featured.jpg?w=1024&fit=fill&f=faces&fm=webp"
+          class="absolute inset-0 h-full w-full object-cover m-3 p-2"
+        />
+      </div>
+
+      <div class="lg:py-16">
+        <article class="space-y-4 text-lg lg:text-xl text-green-400 font-serif ">
+          <p>
+            Nestled in the heart of a secluded forest, Hotel Transylvania stands
+            as a sanctuary for monsters of all shapes and sizes. Founded with
+            the vision of providing a respite from the prying eyes and
+            torch-bearing mobs of the human world, our hotel offers a truly
+            unique experience that is both enchanting and captivating.
+          </p>
+
+          <p class="text-md text-white font-serif  font-semibold">Join Us:</p>
+
+          <p>
+            Whether you're a ghost seeking solace or a mummy in need of a
+            luxurious wrap, Hotel Transylvania opens its doors to creatures of
+            all backgrounds. Step into a realm where monsters can be themselves,
+            enjoy unparalleled hospitality, and create memories that will last
+            for centuries. Experience the magic of Hotel Transylvania, where the
+            extraordinary is celebrated, and the ordinary is left behind.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock body %}
