@@ -2,7 +2,7 @@ from django.db import models
 import os 
 
 def user_profile_pic_path(instance, filename):
-    user_id = instance.id
+    user_id = instance.pk
     new_filename = f'user_{user_id}{os.path.splitext(filename)[1]}'
     return os.path.join('profile_pics', new_filename)
 
