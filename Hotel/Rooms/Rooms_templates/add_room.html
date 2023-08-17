@@ -22,7 +22,7 @@
 
 <div class="addRoom_container flex ">
     <div class="addRoom_form box_shadow text-white rounded-lg border border-blue-900 w-2/3 md:w-7/12 my-5 px-10 py-5 mx-auto">
-        <form action="{% url 'Rooms:add_room' %}" method="post">
+        <form action="{% url 'Rooms:add_room' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             <h2 class="form_heading">Add Room </h2>
             <hr class="mb-10 mx-10">
@@ -49,11 +49,11 @@
                 <select id="roomCapacity" name="roomCapacity" required
                     class="mb-3 px-2 py-1 w-full bg-transparent border border-white text-center text-white">
                     <option value="" hidden>Select Room Cpacity</option>
-                    <option value="Single " {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Single </option>
+                    <option value="Single" {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Single </option>
                     
-                    <option value="Double " {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Double </option>
+                    <option value="Double" {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Double </option>
                     
-                    <option value="Triple " {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Triple </option>
+                    <option value="Triple" {% if request.method == 'POST' %} value="{{ roomCapacity }}" {% endif %} class="bg-black">Triple </option>
                     
                 </select>
             </div>

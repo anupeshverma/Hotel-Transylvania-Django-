@@ -5,13 +5,10 @@ from Booking.models import *
 
 # Create your models here.
 def room_image_path(instance, filename):
-    # Get the user's ID
     room_id = instance.roomNo
-
-    # Generate the new filename using the user's ID
     new_filename = f'Room_{room_id}{os.path.splitext(filename)[1]}'
 
-    return f'Room_Images/{instance.capacity}_{instance.roomNo}/{new_filename}'
+    return f'Room_Images/{instance.roomType}/{instance.capacity}_{instance.roomNo}/{new_filename}'
 
 
 class Room(models.Model):
