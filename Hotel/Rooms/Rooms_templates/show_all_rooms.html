@@ -5,30 +5,77 @@
 <section class="m-3 p-3">
   <h1 class="m-3 text-center text-4xl font-bold bg-blue-500">Rooms</h1>
 
+  <div class="flex justify-between">
+    <div class="mt-1 flex justify-start mx-[5%] my-5 md:mx-10 px-5">
+      <a
+        class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+        href="{% url 'Rooms:show_all_rooms' %}"
+      >
+        Show all Rooms
+      </a>
+    </div>
 
-  {% if acc.role == "admin" or acc.role == "Admin" %}
-  <div class="text-white text-center">
-    <a href="{% url 'Rooms:add_room' %}">
-      <div class="flex flex-row my-[30px] mx-[50px] text-xl font-semibold items-center justify-center hover:underline">
-        <div class="w-6 h-6">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}"
-            stroke="currentColor" className="w-1 h-1">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+    {% if acc.role == "admin" or acc.role == "Admin" %}
+    <div class="text-white text-center mx-2 my-auto">
+      <a href="{% url 'AdminPanel:add_room' %}">
+        <div
+          class="flex flex-row my-[30px] mx-[50px] text-xl font-semibold items-center justify-center hover:underline"
+        >
+          <div class="w-6 h-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              className="w-1 h-1"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div class="mx-2">Add Rooms</div>
         </div>
-        <div class="mx-2">Add Rooms</div>
-      </div>
-    </a>
+      </a>
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 
   <!-- Filter form -->
-  <form action="{% url 'Rooms:show_filtered_rooms' %}" method="POST"
-    class="flex flex-row justify-center my-8 mx-10 space-x-4">
+  <form
+    action="{% url 'Rooms:show_filtered_rooms' %}"
+    method="POST"
+    class="flex flex-row justify-center my-3 mx-10 space-x-4"
+  >
     {% csrf_token %}
-    <div class="flex flex-col">
-      <label for="room_capacity" class="text-xl font-semibold">Room Capacity</label>
-      <select name="room_capacity" id="room_capacity" class="w-48 h-10 border-2 border-gray-300 rounded-md">
+
+    <div class="flex flex-col justify-normal">
+      <label for="room_type" class="text-lg font-semibold text-white"
+        >Room Type:</label
+      >
+      <select
+        name="room_type"
+        id="room_type"
+        class="mt-2 w-48 h-10 border-2 border-gray-300 rounded-md"
+      >
+        <option value="" hidden>Select Room Type :</option>
+        <option value="General">General</option>
+        <option value="Special">Special</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col justify-normal">
+      <label for="room_capacity" class="text-lg font-semibold text-white"
+        >Room Capacity:</label
+      >
+      <select
+        name="room_capacity"
+        id="room_capacity"
+        class="mt-2 w-48 h-10 border-2 border-gray-300 rounded-md"
+      >
         <option value="" hidden>Select Room Capacity:</option>
         <option value="Single">Single</option>
         <option value="Double">Double</option>
@@ -37,27 +84,49 @@
     </div>
 
     <div class="flex flex-col">
-      <label for="check_in_date" class="text-xl font-semibold">Check In Date:</label>
-      <input type="date" name="check_in_date" id="check_in_date"
-        class="w-48 h-10 border-2 border-gray-300 rounded-md" />
+      <label for="check_in_date" class="text-lg font-semibold text-white"
+        >Check In Date:</label
+      >
+      <input
+        type="date"
+        name="check_in_date"
+        id="check_in_date"
+        class="mt-2 w-48 h-10 border-2 border-gray-300 rounded-md"
+      />
     </div>
 
     <div class="flex flex-col">
-      <label for="check_out_date" class="text-xl font-semibold">Check Out Date:</label>
-      <input type="date" name="check_out_date" id="check_out_date"
-        class="w-48 h-10 border-2 border-gray-300 rounded-md" />
+      <label for="check_out_date" class="text-lg font-semibold text-white"
+        >Check Out Date:</label
+      >
+      <input
+        type="date"
+        name="check_out_date"
+        id="check_out_date"
+        class="mt-2 w-48 h-10 border-2 border-gray-300 rounded-md"
+      />
     </div>
-    <button type="submit" class="px-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+    <button
+      type="submit"
+      class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+    >
       Apply Filters
     </button>
   </form>
   <!-- Filter form ends -->
 
-  <div class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4">
+  <div
+    class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4"
+  >
     {% for room in rooms %}
-    <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
-      <img alt="Home" src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"
-        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110" />
+    <div
+      class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4"
+    >
+      <img
+        alt="Home"
+        src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"
+        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
+      />
 
       <div class="mt-2"></div>
 
@@ -82,8 +151,10 @@
           </div>
         </div>
         <div class="book mt-1 flex justify-center">
-          <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-            href="{% url 'Booking:book_room_form' room.capacity room.roomNo room.roomType room.price %}?room_type={{ room.roomType|urlencode }}&room_number={{ room.number }}&capacity={{room.capacity}}&price={{room.price}}">
+          <a
+            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+            href="{% url 'Booking:book_room_form' room.capacity room.roomNo room.roomType room.price %}?room_type={{ room.roomType|urlencode }}&room_number={{ room.number }}&capacity={{room.capacity}}&price={{room.price}}"
+          >
             Book Now
           </a>
         </div>
