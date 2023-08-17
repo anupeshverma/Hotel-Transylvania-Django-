@@ -1,20 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% block body %}
 
-  
 <button class="bg-red-600">
   <a href="{% url 'Rooms:show_all_rooms' %}">Check</a>
 </button>
 
-  
-
 <div class="cover-video h-48 overflow-hidden outline outline-white">
-  <video
-    autoplay
-    loop
-    muted
-    id="video-bg"
-    class="w-full object-cover -z-50 overflow-hidden"
-  >
+  <video autoplay loop muted id="video-bg" class="w-full object-cover -z-50 overflow-hidden">
     <source src="{% static 'cover-video.mp4' %}" type="video/mp4" />
   </video>
 </div>
@@ -24,38 +15,24 @@
   <h1 class="m-3 text-center text-2xl font-bold">Our Facilities</h1>
   <div class="p-3 flex justify-around">
     <div class="flex flex-col items-center">
-      <img
-        src="https://img.icons8.com/arcade/512/coins.png"
-        alt="coins"
-        class="w-12"
-      />
+      <img src="https://img.icons8.com/arcade/512/coins.png" alt="coins" class="w-12" />
       <br />
       Best Rates
     </div>
     <div class="flex flex-col items-center">
       <img
         src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/512/external-Tag-international-women's-day-smashingstocks-flat-smashing-stocks.png"
-        alt="Tags"
-        class="w-12"
-      />
+        alt="Tags" class="w-12" />
       <br />
       No hidden charges
     </div>
     <div class="flex flex-col items-center">
-      <img
-        src="https://img.icons8.com/flat-round/512/wifi.png"
-        alt="Wifi"
-        class="w-12"
-      />
+      <img src="https://img.icons8.com/flat-round/512/wifi.png" alt="Wifi" class="w-12" />
       <br />
       Free Wifi
     </div>
     <div class="flex flex-col items-center">
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/867/867968.png"
-        alt="Food"
-        class="w-12"
-      />
+      <img src="https://cdn-icons-png.flaticon.com/512/867/867968.png" alt="Food" class="w-12" />
       <br />
       Food Service Available
     </div>
@@ -64,100 +41,116 @@
 
 <!-- room section  -->
 
-<section id ="Room Section" class="m-3 p-3">
-  <h1 class="m-3 text-center text-4xl font-bold bg-blue-500">Special Rooms</h1>
+<section id="Room Section" class="m-3 p-3">
+  <h1 class="m-3 text-center text-4xl font-bold text-white">Our Rooms</h1>
 
-  <div
-    class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4"
-  >
+  <div class="grid grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-2 md:mx-10 px-5  ">
     <!-- rooms div goes here  -->
-
-    {% for room in Rooms %}
-    <div
-      class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4"
-    >
-      <img
-        alt="Home"
-        src="{% if room. %}{{ room.image.url }}{% endif %}"
-        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110"
-      />
+    <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
+      <img alt="Home"
+        src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aG90ZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60"
+        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110" />
 
       <div class="flex justify-between md:flex-col">
         <div class="flex capacity flex-col md:flex-row mt-1">
           <div class="text-sm font-medium text-white">Type : &nbsp;</div>
-          <div class="text-sm font-medium text-white">{{room.type}}</div>
+          <div class="text-sm font-medium text-white">General</div>
         </div>
         <div class="rating flex flex-col md:flex-row mt-1">
           <div class="text-sm font-medium text-white">Capacity :&nbsp;</div>
-          <div class="text-sm font-medium text-white">{{room.capacity}}</div>
+          <div class="text-sm font-medium text-white">Single / Double</div>
         </div>
         <div class="price flex flex-col md:flex-row mt-1">
           <div class="text-sm font-medium text-white">Ideal For :&nbsp;</div>
-          <div class="text-sm font-medium text-white">{{room.ideal_for}}</div>
+          <div class="text-sm font-medium text-white">Human</div>
         </div>
       </div>
 
       <div class="book mt-1 flex justify-center">
-        <a
-          class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-          href="{% url 'booking:showRooms' %}"
-        >
+        <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+          href="{% url 'Rooms:show_all_rooms' %}">
           View More
         </a>
       </div>
     </div>
-    {%endfor%}
+    <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
+      <img alt="Home"
+        src="https://media.istockphoto.com/id/1183404803/photo/view-of-dark-room-abandoned-in-the-psychiatric-hospital.webp?b=1&s=170667a&w=0&k=20&c=4PPp_M3QOeTvHCFVVjrx-x1Z-oT5uqh87NZ6mG-6qFA="
+        class="h-56 w-full rounded-md object-cover transition duration-500 hover:scale-110" />
+
+      <div class="flex justify-between md:flex-col">
+        <div class="flex capacity flex-col md:flex-row mt-1">
+          <div class="text-sm font-medium text-white">Type : &nbsp;</div>
+          <div class="text-sm font-medium text-white">Special</div>
+        </div>
+        <div class="rating flex flex-col md:flex-row mt-1">
+          <div class="text-sm font-medium text-white">Capacity :&nbsp;</div>
+          <div class="text-sm font-medium text-white">Double / Triple </div>
+        </div>
+        <div class="price flex flex-col md:flex-row mt-1">
+          <div class="text-sm font-medium text-white">Ideal For :&nbsp;</div>
+          <div class="text-sm font-medium text-white">Monster</div>
+        </div>
+      </div>
+
+      <div class="book mt-1 flex justify-center">
+        <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+          href="{% url 'Rooms:show_all_rooms' %}">
+          View More
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
 <div class="fly_bat">
-    <img src="{% static 'gifs/fly_bat.gif' %}" />
+  <img src="{% static 'gifs/fly_bat.gif' %}" />
 </div>
 <!-- WHAT PEOPLE SAYS -->
 <section id="What_People_Says">
-    <div class="people_says">
-        <h1 class="text-purple-800 text_shadow text-4xl">What People Says</h1>
-        <div class="people">
-            <div class="dp_left">
-                <img src="{% static 'images/default_monster.png' %}" />
-            </div>
-            <div class="quote_left">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
-                facilis.
-                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
-                eveniet eos atque. Esse quaerat et praesentium enim!
-                <br>
-                <h4 align="right">~Monster 1</h4>
-            </div>
-        </div>
-        <div class="people people_right">
-            <div class="quote_right">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
-                facilis.
-                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
-                eveniet eos atque. Esse quaerat et praesentium enim!
-                <br>
-                <h4 align="right">~Sumant Kumar Shah</h4>
-            </div>
-            <div class="dp_right">
-                <img src="{% static 'images/default_human.png' %}" />
-            </div>
-        </div>
-
-        <div class="people">
-            <div class="dp_left">
-                <img class="left_img" src="{% static 'images/default_monster.png' %}" />
-            </div>
-            <div class="quote_left">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut eveniet suscipit
-                facilis.
-                Omnis cupiditate qui commodi laudantium, officiis, facere, dolores placeat ducimus reprehenderit
-                eveniet eos atque. Esse quaerat et praesentium enim!
-                <br>
-                <h4 align="right">~Monster 2</h4>
-            </div>
-        </div>
+  <div class="people_says">
+    <h1 class="text-purple-800 text_shadow text-4xl">What People Says</h1>
+    <div class="people">
+      <div class="dp_left">
+        <img src="{% static 'images/default_monster.png' %}" />
+      </div>
+      <div class="quote_left">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut
+        eveniet suscipit facilis. Omnis cupiditate qui commodi laudantium,
+        officiis, facere, dolores placeat ducimus reprehenderit eveniet eos
+        atque. Esse quaerat et praesentium enim!
+        <br />
+        <h4 align="right">~Monster 1</h4>
+      </div>
     </div>
+    <div class="people people_right">
+      <div class="quote_right">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut
+        eveniet suscipit facilis. Omnis cupiditate qui commodi laudantium,
+        officiis, facere, dolores placeat ducimus reprehenderit eveniet eos
+        atque. Esse quaerat et praesentium enim!
+        <br />
+        <h4 align="right">~Sumant Kumar Shah</h4>
+      </div>
+      <div class="dp_right">
+        <img src="{% static 'images/default_human.png' %}" />
+      </div>
+    </div>
+
+    <div class="people">
+      <div class="dp_left">
+        <img class="left_img" src="{% static 'images/default_monster.png' %}" />
+      </div>
+      <div class="quote_left">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ut
+        eveniet suscipit facilis. Omnis cupiditate qui commodi laudantium,
+        officiis, facere, dolores placeat ducimus reprehenderit eveniet eos
+        atque. Esse quaerat et praesentium enim!
+        <br />
+        <h4 align="right">~Monster 2</h4>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% endblock body %}
