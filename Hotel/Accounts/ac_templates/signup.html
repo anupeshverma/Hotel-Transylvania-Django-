@@ -30,28 +30,28 @@
                 <label for="first_name" class="form_label">First Name*:</label><br>
                 <input name="fname" type="text" required placeholder="Enter first name"
                     class="form_input"
-                    {% if request.method == 'POST' %} value="{{ fname }}" {% endif %}>
+                    {% if fname %} value="{{ fname }}" {% endif %}>
             </div>
 
             <div class="last_name">
                 <label for="last_name" class="form_label">Last Name*:</label><br>
                 <input name="lname" type="text" required placeholder="Enter last name"
                     class="form_input"
-                    {% if request.method == 'POST' %} value="{{ lname }}" {% endif %}>
+                    {% if lname %} value="{{ lname }}" {% endif %}>
             </div>
 
             <div class="email">
                 <label for="email" class="form_label">Email Address*:</label><br>
                 <input name="email" type="email" required placeholder="Enter your email address"
                     class="form_input"
-                    {% if request.method == 'POST' %} value="{{ email }}" {% endif %}>
+                    {% if email %} value="{{ email }}" {% endif %}>
             </div>
 
             <div class="number">
                 <label for="contact-no" class="form_label">Contact No.:</label><br>
                 <input name="contact" type="text" placeholder="Enter your contact number"
                     class="form_input"
-                    {% if request.method == 'POST' %} value="{{ contact }}" {% endif %}>
+                    {% if contact %} value="{{ contact }}" {% endif %}>
             </div>
             <div class="role">
                 <label for="role" class="form_label">Register As*:</label><br>

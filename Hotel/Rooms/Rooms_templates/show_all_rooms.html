@@ -75,7 +75,7 @@
   </form>
   <!-- Filter form ends -->
 
-  <div class="grid sm:grid-cols-1 gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4">
+  <div class="grid gap-12 mx-[5%] my-5 md:grid-cols-3 xl:grid-cols-4">
     {% for room in rooms %}
     <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
       <img alt="Home" src="{% if room.roomImage %}{{ room.roomImage.url}}{% endif %}"

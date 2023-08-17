@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user
 from django.views import View
+from datetime import datetime
 from .models import *
 
 
@@ -15,7 +16,7 @@ class bookRoomForm(LoginRequiredMixin, View):
             "capacity": capacity,
             "room_number": room_number,
             "room_type": roomType,
-            "price":price,
+            "price": price,
         }
         return render(request, "booking_form.html", context)
 
@@ -29,6 +30,28 @@ def bookRoom(request):
     price = request.POST["price"]
     checkIn = request.POST["check_in"]
     checkOut = request.POST["check_out"]
+
+    # Find all booked rooms
+    check_in_date = datetime.strptime(checkIn, "%Y-%m-%d").date()
+    check_out_date = datetime.strptime(checkOut, "%Y-%m-%d").date()
+    booked_rooms = Booking.objects.filter(
+        checkInDate__lte=check_out_date,
+        checkOutDate__gte=check_in_date,
+    ).values_list("roomNo", flat=True)
+
+    # Check if this room exist in booked rooms or not
+    booked_rooms = [str(room_num) for room_num in booked_rooms]
+    if str(roomNo) in booked_rooms:
+        data = {
+            "error": "This room is already booked for the selected dates.",
+            "name":name,
+            "email":email,
+            "room_number":roomNo,
+            "room_type": roomType,
+            "capacity": capacity,
+            "price": price,
+        }
+        return render(request, "booking_form.html", data)
 
     user_email = request.user
     print(user_email)
