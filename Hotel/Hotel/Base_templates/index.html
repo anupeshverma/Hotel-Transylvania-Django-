@@ -73,10 +73,13 @@
       </div>
 
       <div class="book mt-1 flex justify-center">
-        <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-          href="{% url 'Rooms:show_all_rooms' %}">
-          View More
-        </a>
+        <form action="{% url 'Rooms:show_all_rooms' %}" method="post">
+          {% csrf_token %}
+          <button name="room_type" value="General"
+            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
+            View More
+          </button>
+        </form>
       </div>
     </div>
     <div class="border-2 border-violet-500 rounded-md hover:shadow-2xl p-3 md:p-4">
@@ -100,10 +103,13 @@
       </div>
 
       <div class="book mt-1 flex justify-center">
-        <a class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-          href="{% url 'Rooms:show_all_rooms' %}">
-          View More
-        </a>
+        <form action="{% url 'Rooms:show_all_rooms' %}" method="post">
+          {% csrf_token %}
+          <button name="room_type" value="Special"
+            class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500">
+            View More
+          </button>
+        </form>
       </div>
     </div>
   </div>

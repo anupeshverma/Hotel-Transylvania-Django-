@@ -13,7 +13,8 @@ def showAllRooms(request):
     if request.method == "GET":
         rooms = Room.objects.all()
         account = userAccount.objects.filter(email=request.user.username)
-        account = account[0]
+        if account:
+            account = account[0]
         data = {"rooms": rooms, "acc": account}
         return render(request, "show_all_rooms.html", data)
     if request.method == "POST":
@@ -23,7 +24,8 @@ def showAllRooms(request):
         check_out_date = request.POST.get("check_out_date")
 
         account = userAccount.objects.filter(email=request.user.username)
-        account = account[0]
+        if account:
+            account = account[0]
         rooms = Room.objects.all()
 
         # Filter with room type if provided
