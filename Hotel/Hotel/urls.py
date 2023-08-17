@@ -16,6 +16,7 @@ urlpatterns = [
     path('rooms/', include(('Rooms.urls', 'Rooms'), namespace='Rooms')),
     path('admin/', include(('AdminPanel.urls', 'AdminPanel'), namespace='AdminPanel')),
     path('about/',views.about, name='about'),
+    path('contact/',views.contact, name='contact'),
 
  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
