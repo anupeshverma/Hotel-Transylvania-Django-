@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_browser_reload',
+
+    'django_cron', # For task scheduling to delete current bookings after checkout date
     'Accounts',
     'Booking',
     'Rooms',
