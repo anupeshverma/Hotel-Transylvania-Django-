@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import password_validators_help_texts
 from Accounts.models import userAccount
@@ -33,9 +34,20 @@ class currentBookings_(LoginRequiredMixin, View):
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
-        bookings = currentBookings.objects.filter().order_by("-id")
+        bookings = currentBookings.objects.filter().order_by("-bookingDate")
+        
+        paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
+        page = request.GET.get('page', 1)
+        try:
+            bookings = paginator.get_page(page)
+        except PageNotAnInteger:
+            bookings = paginator.get_page(1)
+        except EmptyPage:
+            bookings = paginator.get_page(paginator.num_pages)
+
         data = {
             "bookings":bookings
+
         }
         return render(request, 'current_bookings.html', data)
 
@@ -183,5 +195,13 @@ class allBookings(LoginRequiredMixin, View):
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
-        bookings = Booking.objects.filter().order_by("-id")
+        bookings = Booking.objects.filter().order_by("checkInDate")
+        paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
+        page = request.GET.get('page', 1)
+        try:
+            bookings = paginator.get_page(page)
+        except PageNotAnInteger:
+            bookings = paginator.get_page(1)
+        except EmptyPage:
+            bookings = paginator.get_page(paginator.num_pages)
         return render(request, "all_bookings.html", {"bookings": bookings})

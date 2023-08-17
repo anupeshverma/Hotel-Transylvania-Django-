@@ -35,10 +35,17 @@
             </div>
 
             <div class="capacity">
-                <label for="room_capacity" class="form_label">Room Capcity:</label><br>
+                <label for="room_capacity" class="form_label">Room Capacity:</label><br>
                 <input name="room_capacity" type="text" placeholder="Room Capacity"
                     class="form_input"
                     {% if capacity %} value="{{ capacity }}" {% endif %} readonly>
+            </div>
+            
+            <div class="price">
+                <label for="price" class="form_label">Room Price:</label><br>
+                <input name="price" type="text" placeholder="Room Price"
+                    class="form_input"
+                    {% if price %} value="Rs. {{price }}" {% endif %} readonly>
             </div>
             
            <div class="check-in">

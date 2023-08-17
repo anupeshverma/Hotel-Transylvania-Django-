@@ -10,11 +10,12 @@ from .models import *
 
 # Create your views here.
 class bookRoomForm(LoginRequiredMixin, View):
-    def get(self, request, capacity, room_number, roomType):
+    def get(self, request, capacity, room_number, roomType, price):
         context = {
             "capacity": capacity,
             "room_number": room_number,
             "room_type": roomType,
+            "price":price,
         }
         return render(request, "booking_form.html", context)
 
@@ -25,6 +26,7 @@ def bookRoom(request):
     roomNo = request.POST["room_number"]
     roomType = request.POST["room_type"]
     capacity = request.POST["room_capacity"]
+    price = request.POST["price"]
     checkIn = request.POST["check_in"]
     checkOut = request.POST["check_out"]
 
@@ -54,7 +56,7 @@ def bookRoom(request):
     currBooking.save()
 
     # Send email
-    message = f"Your booking has been done succesfully.\nHere are the deatils:\nName: {name}\nRoom No.: {roomNo}\nRoom Type: {roomType}\nRoom Capacity: {capacity}\nCheckIn Date: {checkIn}\nCheckOut Date: {checkOut}"
+    message = f"Your booking has been done succesfully.\nHere are the deatils:\nName: {name}\nRoom No.: {roomNo}\nRoom Type: {roomType}\nPrice: {price}\nRoom Capacity: {capacity}\nCheckIn Date: {checkIn}\nCheckOut Date: {checkOut}"
     mail_subject = "Room booked succcesfully"
     email = EmailMessage(mail_subject, message, to=[user_email])
     email.send()

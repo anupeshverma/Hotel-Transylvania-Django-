@@ -25,7 +25,7 @@ class Room(models.Model):
     roomType = models.CharField(
         'Room Type', max_length=20, choices=ROOM_TYPE, default='general')
     capacity = models.CharField('Capacity', max_length=20, choices=CAPACITY)
-    price = models.FloatField()
+    price = models.IntegerField()
     roomImage = models.ImageField(upload_to=room_image_path)
     description = models.CharField(max_length=200, default="")
 
