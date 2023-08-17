@@ -35,9 +35,9 @@ class currentBookings_(LoginRequiredMixin, View):
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
         bookings = currentBookings.objects.filter().order_by("-bookingDate")
-        
+
         paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
-        page = request.GET.get('page', 1)
+        page = request.GET.get("page", 1)
         try:
             bookings = paginator.get_page(page)
         except PageNotAnInteger:
@@ -45,11 +45,8 @@ class currentBookings_(LoginRequiredMixin, View):
         except EmptyPage:
             bookings = paginator.get_page(paginator.num_pages)
 
-        data = {
-            "bookings":bookings
-
-        }
-        return render(request, 'current_bookings.html', data)
+        data = {"bookings": bookings}
+        return render(request, "current_bookings.html", data)
 
 
 class allUsers(LoginRequiredMixin, View):
@@ -128,10 +125,7 @@ class editUser(LoginRequiredMixin, View):
     def get(self, request, userid):
         account = userAccount.objects.get(pk=userid)
         active_status = User.objects.get(username=userid).is_active
-        data = {
-            "acc" : account,
-            'active': active_status
-        }
+        data = {"acc": account, "active": active_status}
         return render(request, "edit_user.html", data)
 
     def post(self, request, userid):
@@ -185,7 +179,49 @@ class allRooms(LoginRequiredMixin, View):
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
         rooms = Room.objects.all
-        return render(request, 'all_rooms.html')
+        return render(request, "all_rooms.html")
+
+
+class addRoom(LoginRequiredMixin, View):
+    def get(self, request):
+        user_account = getUserAccount(request)
+        if user_account.role != "Admin" and user_account.role != "admin":
+            return render(
+                request, "error_page.html", {"error": "Unauthorised Access !!"}
+            )
+        return render(request, "add_room.html")
+
+    def post(self, request):
+        roomNo = request.POST["roomNo"]
+        roomType = request.POST["roomType"]
+        capacity = request.POST["roomCapacity"]
+        price = request.POST["price"]
+        roomImage = request.FILES.get("roomImage")
+        description = request.POST["description"]
+
+        room = Room(
+            roomNo=roomNo,
+            roomType=roomType,
+            capacity=capacity,
+            price=price,
+            roomImage=roomImage,
+            description=description,
+        )
+        data = {
+            "roomNo": roomNo,
+            "roomType": roomType,
+            "capacity": capacity,
+            "price": price,
+            "imageURL": str(roomImage),
+            "description": description,
+        }
+
+        # Checking if room no.already exist
+        if Room.objects.filter(roomNo=roomNo).exists():
+            return render(request, "add_room.html", {"error": "Room No. already exist"})
+        room.save()
+
+        return redirect("Rooms:show_all_rooms")
 
 
 class allBookings(LoginRequiredMixin, View):
@@ -197,7 +233,7 @@ class allBookings(LoginRequiredMixin, View):
             )
         bookings = Booking.objects.filter().order_by("checkInDate")
         paginator = Paginator(bookings, 2)  # Show 2 bookings  per page
-        page = request.GET.get('page', 1)
+        page = request.GET.get("page", 1)
         try:
             bookings = paginator.get_page(page)
         except PageNotAnInteger:

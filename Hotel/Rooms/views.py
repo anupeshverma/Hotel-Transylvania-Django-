@@ -43,28 +43,3 @@ def showFilteredRooms(request):
         }
 
         return render(request, "show_all_rooms.html", context)
-
-
-class addRoom(LoginRequiredMixin, View):
-    def get(self, request):
-        return render(request, "add_room.html")
-
-    def post(self, request):
-        roomNo = request.POST["roomNo"]
-        roomType = request.POST["roomType"]
-        capacity = request.POST["roomCapacity"]
-        price = request.POST["price"]
-        roomImage = request.FILES.get("roomImage")
-        description = request.POST["description"]
-
-        room = Room(
-            roomNo=roomNo,
-            roomType=roomType,
-            capacity=capacity,
-            price=price,
-            roomImage=roomImage,
-            description=description,
-        )
-        room.save()
-
-        return redirect("Rooms:show_all_rooms")

@@ -1,28 +1,16 @@
-{% extends 'base.html'%}
-{% block body %}
-
+{% extends 'admin_dashboard.html'%}
+{% block form %}
 
 {% if request.method == 'POST' %}
-    
-    {%if error == 1 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Email already in use !</p>
-
-    {% elif error == 2 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Passwords Do Not Match !</p>
-    
-    {% elif error == 3 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Enter more secure password !</p>
-    
-    {% elif error == 4 %}
-        <p class="mt-5 text-center text-lg font-bold text-red-600">Invalid Contact No. !</p>
+    {%if error  %}
+        <p class="mt-5 text-center text-lg font-bold text-red-600">{{error}}</p>
       {% endif %}  
-    
 {% endif %}
     
 
 <div class="addRoom_container flex ">
     <div class="addRoom_form box_shadow text-white rounded-lg border border-blue-900 w-2/3 md:w-7/12 my-5 px-10 py-5 mx-auto">
-        <form action="{% url 'Rooms:add_room' %}" enctype="multipart/form-data" method="post">
+        <form action="{% url 'AdminPanel:add_room' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             <h2 class="form_heading">Add Room </h2>
             <hr class="mb-10 mx-10">
@@ -73,7 +61,7 @@
             
             <div class="description">
                 <label for="description" class="form_label">Room Description *:</label><br>
-                <textarea name="description" id="description" cols="30" rows="10" required
+                <textarea name="description" id="description" cols="30" rows="5" required
                     class="form_input"
                     {% if request.method == 'POST' %} value="{{ description }}" {% endif %}></textarea>
             </div>
