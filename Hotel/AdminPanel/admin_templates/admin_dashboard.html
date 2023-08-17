@@ -36,23 +36,20 @@
           </a>
         </li>
 
-
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'AdminPanel:current_bookings' %}">
+            <div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-calendar-plus"></i></div>
+              <div>Current Bookings</div>
+            </div>
+          </a>
+        </li>
 
         <li class="flex items-center text-gray-900 text-md py-4">
           <a href="{% url 'AdminPanel:add_user' %}">
             <div class="flex flex-row space-x-4">
               <div><i class="fa-solid fa-user-plus"></i></div>
               <div>Add Users</div>
-            </div>
-          </a>
-        </li>
-
-
-        <li class="flex items-center text-gray-900 text-md py-4">
-          <a href="#">
-            <div class="flex flex-row space-x-4">
-              <div><i class="fa-solid fa-envelope"></i></div>
-              <div>Send mail to added Users</div>
             </div>
           </a>
         </li>
@@ -71,6 +68,15 @@
             <div class="flex flex-row space-x-4">
               <div><i class="fa-solid fa-book"></i></div>
               <div>All Users</div>
+            </div>
+          </a>
+        </li>
+
+        <li class="flex items-center text-gray-900 text-md py-4">
+          <a href="{% url 'AdminPanel:all_rooms' %}">
+            <div class="flex flex-row space-x-4">
+              <div><i class="fa-solid fa-book"></i></div>
+              <div>All Rooms</div>
             </div>
           </a>
         </li>
@@ -169,14 +175,7 @@
           </a>
         </li>
 
-        <li class="flex items-center text-gray-900 text-md py-4">
-          <a href="#">
-            <div class="flex flex-row space-x-4 mb-10">
-              <div><i class="fa-solid fa-calendar-plus"></i></div>
-              <div>Add Academic Events</div>
-            </div>
-          </a>
-        </li>
+
         {% endcomment %}
         <li class="flex items-center text-gray-900 text-md py-4">
           <div>Account</div>

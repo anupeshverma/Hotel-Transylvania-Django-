@@ -68,6 +68,12 @@
                     <option value="Admin" {% if acc.role == "Admin" %} selected {% endif %}>Admin</option>
                 </select>
             </div>
+            <div class="flex items-center p-2">
+                <input type="checkbox" value="active" name="active_status" 
+                {% if active %} checked {% endif %}
+                class="h-5 w-5 relative cursor-pointer rounded-md">
+                <label class="mx-2 font-bold">Active</label>
+            </div>
             <div class="submit_btn my-3 mx-auto">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
                 bg-purple-700 hover:bg-purple-900">Submit</button>

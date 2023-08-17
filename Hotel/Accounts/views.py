@@ -56,7 +56,7 @@ def userlogin(request):
             else:
                 return render(
                     request,
-                    "activation_email.html",
+                    "error_page.html",
                     {"error": "Your account is not Active. Activate First"},
                 )
         else:

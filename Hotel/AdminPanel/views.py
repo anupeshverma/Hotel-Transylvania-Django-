@@ -8,7 +8,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import password_validators_help_texts
 from Accounts.models import userAccount
 from django.db.models import Q
-from Booking.models import Booking
+from Booking.models import Booking, currentBookings
 from Rooms.models import Room
 
 
@@ -26,54 +26,18 @@ def dashboard(request):
     return render(request, "instructions.html", {"acc": user_account})
 
 
-class addUser(LoginRequiredMixin, View):
+class currentBookings_(LoginRequiredMixin, View):
     def get(self, request):
         user_account = getUserAccount(request)
         if user_account.role != "Admin" and user_account.role != "admin":
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
-
-        return render(request, "add_user.html")
-
-    def post(self, request):
-        fname = request.POST["fname"]
-        lname = request.POST["lname"]
-        email = request.POST["email"]
-        contact = request.POST["contact"]
-        role = request.POST["role"]
-        password = request.POST["password"]
-
-
+        bookings = currentBookings.objects.filter().order_by("-id")
         data = {
-            "fname": fname,
-            "lname": lname,
-            "email": email,
-            "contact": contact,
-            "role": role,
+            "bookings":bookings
         }
-
-        # Checking if email is already in use
-        if (
-            User.objects.filter(username=email).exists()
-            and userAccount.objects.filter(email=email).exists()
-        ):
-            return render(request, "add_user.html", {"error": "Email already exist !!"})
-        try:
-            validate_password(password)
-        except ValidationError as e:
-            return render(request, "add_user.html", {"error": "Enter Secure Password"})
-        user = User.objects.create_user(username=email, first_name=fname, last_name=lname, password=password)
-        user.save()
-        new_user = userAccount(
-            first_name=fname,
-            last_name=lname,
-            role=role,
-            email=email,
-            phone_number=contact,
-        )
-        new_user.save()
-        return render(request, "instructions.html")
+        return render(request, 'current_bookings.html', data)
 
 
 class allUsers(LoginRequiredMixin, View):
@@ -97,10 +61,67 @@ class allUsers(LoginRequiredMixin, View):
         return render(request, "all_users.html", data)
 
 
+class addUser(LoginRequiredMixin, View):
+    def get(self, request):
+        user_account = getUserAccount(request)
+        if user_account.role != "Admin" and user_account.role != "admin":
+            return render(
+                request, "error_page.html", {"error": "Unauthorised Access !!"}
+            )
+
+        return render(request, "add_user.html")
+
+    def post(self, request):
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        email = request.POST["email"]
+        contact = request.POST["contact"]
+        role = request.POST["role"]
+        password = request.POST["password"]
+
+        data = {
+            "fname": fname,
+            "lname": lname,
+            "email": email,
+            "contact": contact,
+            "role": role,
+        }
+
+        # Checking if email is already in use
+        if (
+            User.objects.filter(username=email).exists()
+            and userAccount.objects.filter(email=email).exists()
+        ):
+            return render(request, "add_user.html", {"error": "Email already exist !!"})
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            return render(request, "add_user.html", {"error": "Enter Secure Password"})
+        user = User.objects.create_user(
+            username=email, first_name=fname, last_name=lname, password=password
+        )
+        user.save()
+        new_user = userAccount(
+            first_name=fname,
+            last_name=lname,
+            role=role,
+            email=email,
+            phone_number=contact,
+        )
+        new_user.save()
+        return render(request, "instructions.html")
+
+
 class editUser(LoginRequiredMixin, View):
     def get(self, request, userid):
         account = userAccount.objects.get(pk=userid)
-        return render(request, "edit_user.html", {"acc": account})
+        active_status = User.objects.get(username=userid).is_active
+        data = {
+            "acc" : account,
+            'active': active_status
+        }
+        return render(request, "edit_user.html", data)
+
     def post(self, request, userid):
         user_account = userAccount.objects.filter(email=request.POST.get("email"))
         user_account = user_account[0]
@@ -116,9 +137,13 @@ class editUser(LoginRequiredMixin, View):
         user_admin.first_name = request.POST.get("fname")
         user_admin.last_name = request.POST.get("lname")
         user_admin.username = request.POST.get("email")
+        if request.POST.get("active_status") == "active":
+            user_admin.is_active = True
+        else:
+            user_admin.is_active = False
         user_admin.save()
 
-        url_name = 'AdminPanel:all_users'
+        url_name = "AdminPanel:all_users"
         dynamic_url = reverse(url_name)
         return redirect(dynamic_url)
 
@@ -135,10 +160,21 @@ class deleteUser(LoginRequiredMixin, View):
         mUser.delete()
         account.delete()
 
-        url_name = 'AdminPanel:all_users'
+        url_name = "AdminPanel:all_users"
         dynamic_url = reverse(url_name)
         return redirect(dynamic_url)
-    
+
+
+class allRooms(LoginRequiredMixin, View):
+    def get(self, request):
+        user_account = getUserAccount(request)
+        if user_account.role != "Admin" and user_account.role != "admin":
+            return render(
+                request, "error_page.html", {"error": "Unauthorised Access !!"}
+            )
+        rooms = Room.objects.all
+        return render(request, 'all_rooms.html')
+
 
 class allBookings(LoginRequiredMixin, View):
     def get(self, request):
@@ -147,5 +183,5 @@ class allBookings(LoginRequiredMixin, View):
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
-        bookings = bookings = Booking.objects.filter().order_by("-id")[:5]
+        bookings = Booking.objects.filter().order_by("-id")
         return render(request, "all_bookings.html", {"bookings": bookings})
