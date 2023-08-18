@@ -16,8 +16,12 @@
             </div>
             <div class="password">
                 <label for="password" class="form_label">Password:</label><br>
-                <input name="password" type="password" required placeholder="Enter your password"
-                    class="mb-3 px-2 py-1 w-full rounded-md border border-purple-900 text-black text-center">
+                <div class="flex">
+                <input id="password" name="password" type="password" required placeholder="Enter your password"
+                    class="mb-3 px-2 py-1 w-11/12 rounded-md border border-purple-900 text-black text-center">
+                <i class="w-1/12 mr-1 p-3 far fa-eye hover:scale-110 duration-300 transition ease-in-out delay-150" 
+                    id="togglePassword"></i>
+                </div>
             </div>
             <div class="submit_btn my-3 flex justify-between ">
                 <button class="px-2 py-1 font-bold text-white rounded-lg border border-purple-900 
@@ -33,5 +37,17 @@
     </div>
 </div>
 
+<script>
+    
+    //  password hide and show feature
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+  
+    togglePassword.addEventListener('click', function (e) {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+  });
+  </script>
 
 {% endblock %}

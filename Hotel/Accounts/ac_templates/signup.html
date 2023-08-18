@@ -65,13 +65,22 @@
             </div>
             <div class="password">
                 <label for="password" class="form_label">Password:</label><br>
-                <input name="password" type="password" required placeholder="Enter your password"
-                    class="form_input">
+                <div class="flex ">
+                    <input id="password" name="password" type="password" required placeholder="Enter your password"
+                    class="form_input w-11/12" > 
+                    <i class="w-1/12 p-3 far fa-eye hover:scale-110 duration-300 transition ease-in-out delay-150" 
+                     id="togglePassword1"></i>
+                </div>
             </div>
+
             <div class="confirm-password">
                 <label for="confirm-password" class="form_label">Confirm Password:</label><br>
-                <input name="confirm_password" type="password" required placeholder="Enter your password again"
-                    class="form_input">
+                <div class="flex ">
+                <input id="confirm_password" name="confirm_password" type="password" required placeholder="Enter your password again"
+                    class="form_input w-11/12">
+                    <i class="w-1/12 p-3 far fa-eye hover:scale-110 duration-300 transition ease-in-out delay-150" 
+                    id="togglePassword2"></i>
+                </div>
                     <p class="mb-3 text-xs text-red-500">&nbsp;*Password must contain alteast one capital letter, one small letter, one number and a special character.</p>
             </div>
             <div class="submit_btn my-3">
@@ -86,5 +95,25 @@
     </div>
 </div>
 
+<script>
+    
+      //  password hide and show feature
+      const togglePassword1 = document.querySelector('#togglePassword1');
+      const togglePassword2 = document.querySelector('#togglePassword2');
+      const password = document.querySelector('#password');
+      const confirm_password = document.querySelector('#confirm_password');
+    
+      togglePassword1.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    togglePassword2.addEventListener('click', function (e) {
+        const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirm_password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+    </script>
 
 {% endblock %}
