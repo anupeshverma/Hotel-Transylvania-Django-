@@ -39,7 +39,7 @@ def showAllRooms(request):
         if check_in_date and check_out_date:
             check_in_date = datetime.strptime(check_in_date, "%Y-%m-%d").date()
             check_out_date = datetime.strptime(check_out_date, "%Y-%m-%d").date()
-            booked_rooms = Booking.objects.filter(
+            booked_rooms = currentBookings.objects.filter(
                 checkInDate__lte=check_out_date,
                 checkOutDate__gte=check_in_date,
             ).values_list("roomNo", flat=True)

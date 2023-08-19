@@ -1,0 +1,34 @@
+py -m venv virtuaL-env_name
+virtual_env_name\Scripts\activate 
+
+pip install django
+pip install pillow 
+pip install django-cron
+
+django-admin startproject project_name 
+python manage.py createsuperuser
+python manage.py startapp app_name 
+
+
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runcrons
+
+
+
+
+git clone <GitHub_repository_URL>
+git remote add origin <GitHub_repository_URL>
+git push -u origin master
+git remote remove origin
+
+git add .
+git commit -m "message"
+git push 
+git pull
+git branch branch_name
+git checkout branch_name
+
+
+

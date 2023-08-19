@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -48,6 +50,11 @@ class currentBookings_(LoginRequiredMixin, View):
             return render(
                 request, "error_page.html", {"error": "Unauthorised Access !!"}
             )
+        # Delete expired bookings
+        now = timezone.now()
+        expired_bookings = currentBookings.objects.filter(checkOutDate__lt=now)
+        for booking in expired_bookings:
+            booking.delete()
         bookings = currentBookings.objects.filter().order_by("-bookingDate")
         bookings = paginator_func(request, bookings, 10)
 
