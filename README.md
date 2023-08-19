@@ -1,7 +1,7 @@
 # Hotel Transylvania
 
 ## Problem Statement:
-“Count Dracula, the owner of the Hotel Transylvania, wants to celebrate the 118th birthday of his beloved daughter, Mavis, so he invites some of the famous monsters to the celebration. For those who don’t know, Hotel Transylvania is a place where the world’s monsters can take a rest from human civilization.
+“Count Dracula, the owner of the Hotel Transylvania, wants to celebrate the 118th birthday of his beloved daughter, Mavis, so he invites some of the famous monsters to the celebration. For those who don’t know, Hotel Transylvania is a place where the world’s monsters can take a rest from human civilization".
 
 Hence, Dracula needs to ensure that the hotel booking system is managed efficiently through a web application. 
 
