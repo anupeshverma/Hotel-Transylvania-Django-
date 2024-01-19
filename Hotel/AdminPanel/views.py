@@ -55,7 +55,7 @@ class currentBookings_(LoginRequiredMixin, View):
         expired_bookings = currentBookings.objects.filter(checkOutDate__lt=now)
         for booking in expired_bookings:
             booking.delete()
-        bookings = currentBookings.objects.filter().order_by("-bookingDate")
+        bookings = currentBookings.objects.filter().order_by("checkInDate")
         bookings = paginator_func(request, bookings, 10)
 
         data = {"bookings": bookings}
@@ -130,7 +130,7 @@ class addUser(LoginRequiredMixin, View):
             first_name=fname,
             last_name=lname,
             role=role,
-            email=email,
+            username=email,
             phone_number=contact,
         )
         new_user.save()

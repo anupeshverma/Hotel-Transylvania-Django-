@@ -4,17 +4,13 @@ from Rooms.models import Room
 
 def home(request):
     roomData = Room.objects.all()
-
     data = {"roomData": roomData}
-
     return render(request, "index.html", {"roomData": roomData})
 
 
 def about(request):
-    
     return render(request, "about.html")
 
 
 def contact(request):
-    
     return render(request, "contact.html")

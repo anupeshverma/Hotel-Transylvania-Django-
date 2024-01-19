@@ -22,7 +22,6 @@ import random
 import os
 
 
-
 def checkrender(request):
     return render(request, "change_password.html")
 
@@ -43,12 +42,12 @@ def userlogin(request):
                 user = authenticate(username=email, password=password)
                 if user is not None:
                     login(request, user)
-                    next_url = request.GET.get('next')
+                    next_url = request.GET.get("next")
                     print(next_url)
                     if next_url:
                         return redirect(next_url)
                     else:
-                        return redirect('home')
+                        return redirect("home")
                 else:
                     return render(
                         request, "login.html", {"error": "Invalid Email or Password"}
@@ -138,8 +137,12 @@ def userSignup(request):
             email.send()
 
         except BadHeaderError:
-            return HttpResponseServerError(
-                "An error occurred while sending the email. Please try again later."
+            return render(
+                request,
+                "error_page.html",
+                {
+                    "error": "An error occurred while sending the email. Please try again later."
+                },
             )
         try:
             user.full_clean()
@@ -231,9 +234,7 @@ def resendActivationEmail(request):
             return render(
                 request,
                 "error_page.html",
-                {
-                    "error": "Please confirm your email address to activate the account"
-                },
+                {"error": "Please confirm your email address to activate the account"},
             )
         # User exist and account is already activatedd.
         else:
@@ -251,21 +252,22 @@ class profile(LoginRequiredMixin, View):
         if not user_account:
             logout(request)
             return render(request, "error_page.html", {"error": "No Profile Found"})
-        
+
         user_account = user_account[0]
-        bookings = Booking.objects.filter(user=user_account).order_by('-bookingDate')
+        bookings = Booking.objects.filter(user=user_account).order_by("-bookingDate")
 
         paginator = Paginator(bookings, 5)  # Show 5 bookings  per page
-        page = request.GET.get('page', 1)
+        page = request.GET.get("page", 1)
         try:
             bookings = paginator.get_page(page)
         except PageNotAnInteger:
             bookings = paginator.get_page(1)
         except EmptyPage:
-                bookings = paginator.get_page(paginator.num_pages)
+            bookings = paginator.get_page(paginator.num_pages)
 
-
-        return render(request, "profile_page.html", {"acc": user_account, "bookings": bookings})
+        return render(
+            request, "profile_page.html", {"acc": user_account, "bookings": bookings}
+        )
 
 
 def editProfile(request):
@@ -401,7 +403,7 @@ def changePassword(request):
 def forgotPassword(request):
     if request.method == "GET":
         return render(request, "forgot_password.html")
-    
+
     if request.method == "POST":
         email = request.POST.get("email")
         request.session["email"] = email

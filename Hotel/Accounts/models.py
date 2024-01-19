@@ -3,7 +3,7 @@ import os
 
 def user_profile_pic_path(instance, filename):
     user_id = instance.pk
-    new_filename = f'user_{user_id}{os.path.splitext(filename)[1]}'
+    new_filename = f'{user_id}{os.path.splitext(filename)[1]}'
     return os.path.join('profile_pics', new_filename)
 
 # Create your models here.

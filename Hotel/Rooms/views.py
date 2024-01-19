@@ -3,7 +3,7 @@ from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from datetime import datetime
-from Booking.models import Booking
+from Booking.models import *
 from .models import Room
 
 # Create your views here.
