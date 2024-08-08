@@ -1,7 +1,8 @@
 py -m venv virtuaL-env_name
 virtual_env_name\Scripts\activate 
 (I running scripts is disabled then-
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser)
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Enter A for Yes to all)
 
 
 pip install django
