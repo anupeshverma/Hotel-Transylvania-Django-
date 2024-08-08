@@ -1,5 +1,8 @@
 py -m venv virtuaL-env_name
 virtual_env_name\Scripts\activate 
+(I running scripts is disabled then-
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser)
+
 
 pip install django
 pip install pillow 
