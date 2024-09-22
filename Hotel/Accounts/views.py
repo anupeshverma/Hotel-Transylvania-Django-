@@ -121,11 +121,11 @@ def userSignup(request):
         user.is_active = False
 
         current_site = get_current_site(request)
-        mail_subject = "Activation link has been sent to your email."
+        mail_subject = "Activation link."
         message = render_to_string(
             "email_activation.html",
             {
-                "user": user,
+                "user": fname,
                 "domain": current_site.domain,
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "token": account_activation_token.make_token(user),

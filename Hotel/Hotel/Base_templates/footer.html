@@ -1,44 +1,62 @@
 {%load static %}
 
 <footer class="bg-purple-800 mt-10 text-center text-white">
-    <div class="w-full overflow-hidden flex"
-    style="background-color: #242026;">
-        <img src="{% static 'gifs/walk_human.gif' %}" class="animate-walk-animation h-32">
-        <img src="{% static 'gifs/walk_monster.gif' %}" class="animate-walk-animation h-32">
+  <div class="w-full overflow-hidden flex" style="background-color: #242026">
+    <img
+      src="{% static 'gifs/walk_human.gif' %}"
+      class="animate-walk-animation h-32"
+    />
+    <img
+      src="{% static 'gifs/walk_monster.gif' %}"
+      class="animate-walk-animation h-32"
+    />
+  </div>
+  <div class="py-4">
+    Copyright &copy;
+    <span class="text-gray-300">2022 Hotel Transylvania</span>
+  </div>
+  <div class="flex justify-around">
+    <div class="contact-box">
+      <img
+        src="https://img.icons8.com/ios-filled/512/company.png"
+        alt="building"
+        width="60px"
+      /><br />
+      <span class="underline font-bold">Location</span><br />
+      Lorem, ipsum dolor.
     </div>
-    <div class="py-4">
-        Copyright &copy;
-        <span class="text-gray-300">2022 Hotel Transylvania</span>
+    <div class="contact-box">
+      <img
+        src="https://img.icons8.com/ios-filled/512/ringing-phone.png"
+        alt="phone"
+        width="60px"
+      /><br />
+      <span class="underline font-bold">Phone</span><br />
+      +91 123456789
     </div>
-    <div class="flex justify-around">
-        <div class="contact-box">
-            <img src="https://img.icons8.com/ios-filled/512/company.png" alt="building" width="60px"><br>
-            <span class="underline font-bold">Location</span><br>
-            Lorem, ipsum dolor.
-        </div>
-        <div class="contact-box">
-            <img src="https://img.icons8.com/ios-filled/512/ringing-phone.png" alt="phone" width="60px"><br>
-            <span class="underline font-bold">Phone</span><br>
-            +91 123456789
-        </div>
-        <div class="contact-box">
-            <img src="https://img.icons8.com/ios-glyphs/512/mail-account.png" alt="e-mail" width="60px"><br>
-            <span class="underline font-bold">E-Mail</span><br>
-            fakemail@ghost.com
-        </div>
+    <div class="contact-box">
+      <img
+        src="https://img.icons8.com/ios-glyphs/512/mail-account.png"
+        alt="e-mail"
+        width="60px"
+      /><br />
+      <span class="underline font-bold">E-Mail</span><br />
+      fakemail@ghost.com
     </div>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
+
+<!-- Function to make animation of walking -->
 <script>
-    
-    function animateWalk() {
-    const walkImages = document.querySelectorAll('.animate-walk-animation');
+  function animateWalk() {
+    const walkImages = document.querySelectorAll(".animate-walk-animation");
     walkImages.forEach((image) => {
-        image.style.animation = 'walk-animation 10s linear infinite';
+      image.style.animation = "walk-animation 10s linear infinite";
     });
 
-    const styleSheet = document.createElement('style');
+    const styleSheet = document.createElement("style");
     styleSheet.innerHTML = `
         @keyframes walk-animation {
             0% {
@@ -52,8 +70,7 @@
         }
     `;
     document.head.appendChild(styleSheet);
-}
+  }
 
-animateWalk();
-
+  animateWalk();
 </script>
