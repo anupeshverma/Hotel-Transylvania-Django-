@@ -1,7 +1,8 @@
 # Hotel Transylvania
 
-# [Demo Video](https://drive.google.com/file/d/1RPvDHFGJc5MSw0MYBQU98w5vIhvOLOdO/view?usp=sharing)
-# [VISIT SITE (Frontend Only)](https://anupeshverma.github.io/Hotel-Transylvania/)
+## [Demo Video](https://drive.google.com/file/d/1RPvDHFGJc5MSw0MYBQU98w5vIhvOLOdO/view?usp=sharing)
+## [VISIT SITE](https://anupeshverma.pythonanywhere.com/)
+## [VISIT SITE (Frontend Only)](https://anupeshverma.github.io/Hotel-Transylvania/)
 
 ## Problem Statement:
 “Count Dracula, the owner of the Hotel Transylvania, wants to celebrate the 118th birthday of his beloved daughter, Mavis, so he invites some of the famous monsters to the celebration. For those who don’t know, Hotel Transylvania is a place where the world’s monsters can take a rest from human civilization".
